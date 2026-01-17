@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zen New Tab — Chrome Extension</title>
+  <meta name="description" content="Zen New Tab transforms your browser's start page into a unified, distraction-free sanctuary. Minimal, calming new tab with time, quotes, backgrounds, weather, and search." />
+  <meta name="keywords" content="Zen New Tab, Chrome Extension, Minimal Dashboard, Productivity, Quotes, Weather, Backgrounds, Quick Search" />
+  <meta name="author" content="Gean Paulo" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Zen New Tab — Chrome Extension" />
+  <meta property="og:description" content="Zen New Tab transforms your browser's start page into a unified, distraction-free sanctuary. Minimal, calming new tab with time, quotes, backgrounds, weather, and search." />
+  <meta property="og:image" content="assets/zentab.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://geanpaulo.com/zen-new-tab" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Zen New Tab — Chrome Extension" />
+  <meta name="twitter:description" content="Zen New Tab transforms your browser's start page into a unified, distraction-free sanctuary. Minimal, calming new tab with time, quotes, backgrounds, weather, and search." />
+  <meta name="twitter:image" content="assets/zentab.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/zen.png" type="image/png" />
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Zen New Tab",
+    "url": "https://geanpaulo.com/zen-new-tab",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome",
+    "author": {
+      "@type": "Person",
+      "name": "Gean Paulo",
+      "url": "https://geanpaulo.com/"
+    },
+    "description": "Zen New Tab transforms your browser's start page into a unified, distraction-free sanctuary. Minimal, calming new tab with time, quotes, backgrounds, weather, and search."
+  }
+  </script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;600;700&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { zenblue: '#4286de', zenslate: '#0f172a' },
+          fontFamily: { sans: ['Lexend Deca', 'Manrope', 'ui-sans-serif', 'system-ui'] }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .screenshot {
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,250,250,0.95));
+      border-radius: 1rem;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.08);
+      border: 1px solid rgba(15,23,42,0.04);
+    }
+    @media (max-width: 640px) { .screenshot { min-height: 260px; } }
+    #prevBtn, #nextBtn { transition: opacity 0.3s, transform 0.3s; }
+    #prevBtn:hover, #nextBtn:hover { transform: scale(1.1); }
+    .rounded-xl { border-radius: 1rem !important; }
+    .rounded-lg { border-radius: 0.75rem !important; }
+    .shadow-md { box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important; }
+  </style>
+</head>
+
+<body class="bg-white text-zenslate antialiased font-sans transition-colors duration-200">
+<div id="page" class="min-h-screen flex flex-col">
+
+  <!-- NAV / HERO -->
+  <header class="bg-gradient-to-r from-zenblue/10 to-white border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-zenblue/50 to-zenblue/20 flex items-center justify-center shadow-md">
+          <img src="assets/zen.png" alt="Zen New Tab logo" class="w-8 h-8" />
+        </div>
+        <div>
+          <h1 class="text-lg font-semibold leading-tight">Zen New Tab</h1>
+          <p class="text-xs text-slate-600">Minimal • Calm • Productive</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://chromewebstore.google.com/detail/chhlgdhacpabpphphdhjicnpbpklpdbk?utm_source=item-share-cb" target="_blank" rel="noopener noreferrer" 
+           class="bg-zenblue hover:bg-zenblue/80 text-white font-semibold py-2 px-4 rounded-xl shadow-md text-sm transition">Install Extension</a>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-extrabold leading-tight">A unified minimalist dashboard featuring focused search and essential tools</h2>
+          <p class="mt-4 text-slate-600 max-w-xl">Zen New Tab transforms your browser's start page into a unified, distraction-free sanctuary. Designed to reduce digital clutter, the Zen dashboard harmonizes essential elements into a single interface.</p>
+          <div class="mt-6 flex items-center gap-4">
+            <a href="https://chromewebstore.google.com/detail/chhlgdhacpabpphphdhjicnpbpklpdbk?utm_source=item-share-cb" target="_blank" rel="noopener noreferrer"
+               class="bg-zenblue hover:bg-zenblue/80 text-white font-semibold py-3 px-6 rounded-xl shadow-lg inline-block transition">Install Now</a>
+            <a href="#features" class="text-sm text-slate-600 hover:underline">Learn more →</a>
+          </div>
+          <div class="mt-6 text-xs text-slate-500">Free and open-source. Works seamlessly in all modern browsers with Chrome support.</div>
+        </div>
+        <div class="flex justify-center md:justify-end">
+          <img src="assets/zentab.png" alt="Zen New Tab preview" class="w-full max-w-md md:max-w-lg lg:max-w-xl rounded-xl shadow-md object-cover" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- FEATURES -->
+  <main class="flex-1">
+    <section id="features" class="max-w-6xl mx-auto px-6 py-12">
+      <h3 class="text-xl font-semibold">Features</h3>
+      <p class="text-slate-600 mt-2 max-w-2xl">Everything you need to stay productive while keeping your new tab minimal and calming.</p>
+
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-5 bg-white rounded-xl shadow-md border border-gray-100">
+          <div class="w-16 h-16 rounded-xl bg-zenblue/20 flex items-center justify-center mb-3">
+            <img src="assets/clock.png" alt="Time & Date icon" class="w-10 h-10" />
+          </div>
+          <h4 class="font-semibold">Time & Date</h4>
+          <p class="mt-2 text-sm text-slate-600">Quick glance at the current time and date in your preferred format.</p>
+        </div>
+
+        <div class="p-5 bg-white rounded-xl shadow-md border border-gray-100">
+          <div class="w-16 h-16 rounded-xl bg-zenblue/20 flex items-center justify-center mb-3">
+            <img src="assets/quote.png" alt="Quotes icon" class="w-10 h-10" />
+          </div>
+          <h4 class="font-semibold">Daily Quotes</h4>
+          <p class="mt-2 text-sm text-slate-600">Start your day with inspiring quotes directly on your new tab.</p>
+        </div>
+
+        <div class="p-5 bg-white rounded-xl shadow-md border border-gray-100">
+          <div class="w-16 h-16 rounded-xl bg-zenblue/20 flex items-center justify-center mb-3">
+            <img src="assets/backgrounds.png" alt="Backgrounds icon" class="w-10 h-10" />            
+          </div>
+          <h4 class="font-semibold">Beautiful Backgrounds</h4>
+          <p class="mt-2 text-sm text-slate-600">Rotating high-quality backgrounds to make your new tab visually appealing.</p>
+        </div>
+
+        <div class="p-5 bg-white rounded-xl shadow-md border border-gray-100">
+          <div class="w-16 h-16 rounded-xl bg-zenblue/20 flex items-center justify-center mb-3">
+            <img src="assets/weather.png" alt="Weather icon" class="w-10 h-10" /> 
+          </div>
+          <h4 class="font-semibold">Weather Updates</h4>
+          <p class="mt-2 text-sm text-slate-600">Check your current weather at a glance without leaving the tab.</p>
+        </div>
+
+        <div class="p-5 bg-white rounded-xl shadow-md border border-gray-100">
+          <div class="w-16 h-16 rounded-xl bg-zenblue/20 flex items-center justify-center mb-3">
+            <img src="assets/search.png" alt="Search icon" class="w-10 h-10" /> 
+          </div>
+          <h4 class="font-semibold">Quick Search</h4>
+          <p class="mt-2 text-sm text-slate-600">Search your favorite websites directly from the new tab, instantly.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENSHOTS CAROUSEL -->
+    <section id="screenshots" class="bg-gray-50 py-12">
+      <div class="max-w-6xl mx-auto px-6">
+        <h3 class="text-lg font-semibold mb-6 text-center">Screenshots</h3>
+        <div id="carouselContainer" class="overflow-hidden rounded-xl shadow-md relative group">
+          <img id="carouselImage" src="assets/1.png" alt="Zen New Tab screenshot" class="w-full object-contain transition duration-500" />
+          <button id="prevBtn" class="absolute top-1/2 left-3 -translate-y-1/2 bg-white/80 hover:bg-white/95 text-zenblue p-4 rounded-full shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span class="text-xl font-bold">&#10094;</span>
+          </button>
+          <button id="nextBtn" class="absolute top-1/2 right-3 -translate-y-1/2 bg-white/80 hover:bg-white/95 text-zenblue p-4 rounded-full shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span class="text-xl font-bold">&#10095;</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const images = ['assets/1.png','assets/2.png','assets/4.png'];
+      let currentIndex = 0;
+      const carouselImage = document.getElementById('carouselImage');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      function showImage(index){ carouselImage.src = images[index]; }
+      prevBtn.addEventListener('click',()=>{ currentIndex=(currentIndex-1+images.length)%images.length; showImage(currentIndex); });
+      nextBtn.addEventListener('click',()=>{ currentIndex=(currentIndex+1)%images.length; showImage(currentIndex); });
+    </script>
+
+    <!-- INSTALL -->
+    <section id="install" class="max-w-6xl mx-auto px-6 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h3 class="text-2xl font-bold">Install Zen New Tab</h3>
+          <p class="mt-2 text-slate-600 max-w-xl">Free and open-source. Add Zen New Tab to Chrome and make your new tab productive and calm.</p>
+          <div class="mt-6 p-6 rounded-xl bg-white border border-gray-100 shadow-md">
+            <a href="https://chromewebstore.google.com/detail/chhlgdhacpabpphphdhjicnpbpklpdbk?utm_source=item-share-cb" target="_blank" rel="noopener noreferrer"
+               class="w-full block bg-zenblue hover:bg-zenblue/80 text-white font-semibold py-3 px-6 rounded-xl shadow text-center">Install Now</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold">How to use</h4>
+          <ol class="mt-3 text-sm text-slate-600 space-y-2 list-decimal list-inside">
+            <li>Click Install Now and open the Chrome Web Store page.</li>
+            <li>Add Zen New Tab to Chrome via "Add to Chrome".</li>
+            <li>Open a new tab to enjoy time, quotes, backgrounds, weather, and search instantly.</li>
+          </ol>
+          <div class="mt-6 text-xs text-slate-500">For help, contact <a href="mailto:geanpaulo@mail.com" class="underline">geanpaulo@mail.com</a>.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<!-- FOOTER -->
+<footer class="bg-white border-t border-gray-100">
+  <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between text-sm text-slate-600 gap-2 sm:gap-0">
+    <div>© <span id="year"></span> Zen New Tab • Built by Gean Paulo</div>
+    <div class="flex gap-4">
+      <a href="https://geanpaulo19.github.io/zen-new-tab-privacy/privacy.html" class="underline hover:text-zenblue">Privacy Policy</a>
+      <a href="https://geanpaulo19.github.io/zen-new-tab-privacy/devinfo.html" class="underline hover:text-zenblue">Change Log</a>
+      <a href="https://geanpaulo.com/" class="underline hover:text-zenblue">Developer Website</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
