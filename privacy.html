@@ -72,14 +72,14 @@
     <h1>Zen New Tab - Privacy Policy</h1>
   </header>
 
-  <p><strong>Effective Date:</strong> January 16, 2026</p>
+  <p><strong>Effective Date:</strong> March 21, 2026 &nbsp;·&nbsp; <em>Updated from January 16, 2026</em></p>
 
   <section class="highlight-box">
     <strong>Commitment to Privacy:</strong> Zen New Tab is designed to be a private-by-default, minimalist dashboard. We do not track you, we do not sell your data, and we do not collect any personally identifiable information (PII).
   </section>
 
   <h2>1. Single Purpose & Description</h2>
-  <p>Zen New Tab provides a unified minimalist dashboard that streamlines your start-page experience. It harmonizes essential elements like time, date, daily inspiration, weather, and integrated search into one cohesive interface to eliminate digital clutter.</p>
+  <p>Zen New Tab provides a unified minimalist dashboard that streamlines your start-page experience. It brings together time, date, daily inspiration, weather, integrated search, quick links, sticky notes, and a suite of productivity mini-apps (Pomodoro Timer, World Clock, To-do List, Countdown Timer, Calendar, and Focus Sounds) into one cohesive, clutter-free interface.</p>
 
   <h2>2. Data Collection and Limited Use</h2>
   <p>This extension does <strong>not</strong> collect personal data. All features operate locally within your browser. <strong>Zen New Tab adheres to the Google Web Store Limited Use Policy:</strong></p>
@@ -91,9 +91,11 @@
   <h2>3. API Usage & Search Functionality</h2>
   <p>The extension fetches dynamic content to power the dashboard via secure (HTTPS) requests:</p>
   <ul>
-    <li><strong>Backgrounds:</strong> Retrieves high-quality imagery via proxy from Unsplash, and Lorem Picsum.</li>
-    <li><strong>Inspiration:</strong> Fetches daily quotes from ZenQuotes, TypeFit, and Quotes-DB.</li>
-    <li><strong>Weather:</strong> Uses the Open-Meteo API to provide real-time updates based on your location.</li>
+    <li><strong>Backgrounds:</strong> Retrieves high-quality imagery via proxy from Unsplash and Lorem Picsum.</li>
+    <li><strong>Inspiration:</strong> Fetches daily quotes from ZenQuotes, TypeFit, Forismatic, DummyJSON, FreeAPI, and Quotes-DB. Quotes are cached locally for the day.</li>
+    <li><strong>Weather:</strong> Uses the Open-Meteo API to provide real-time weather updates based on your approximate location. Results are cached locally for 15 minutes.</li>
+    <li><strong>Reverse Geocoding:</strong> Uses the Nominatim (OpenStreetMap) API to resolve your latitude/longitude into a human-readable city name for the weather widget. No personal data is stored by this service.</li>
+    <li><strong>World Clock City Lookup:</strong> When you add a city to the World Clock, your typed city name is sent to Nominatim for geocoding and to Open-Meteo to determine its IANA timezone. This happens only on your explicit action and no data is retained.</li>
     <li><strong>Search Suggestions:</strong> When you type in the integrated search bar, your query is sent to our Search API <em>solely</em> to provide real-time suggestions. This data is processed in transit, is never stored, and is not linked to your identity.</li>
   </ul>
 
@@ -101,24 +103,40 @@
   <p>Geolocation is used <strong>exclusively</strong> to provide local weather information. The location data is processed locally to determine your city and is never shared, stored, or used for any other purpose.</p>
 
   <h2>5. Local Storage</h2>
-  <p>We use the browser's local storage to store your preferences locally on your device, including:</p>
+  <p>We use the browser's <code>localStorage</code> to store your preferences and content entirely on your own device. Nothing is ever uploaded to a server. Data stored includes:</p>
   <ul>
-    <li>UI preferences (12/24-hour time, units).</li>
-    <li>Cached background and quote data for faster loading.</li>
-    <li>Temporary cache for weather and search suggestions.</li>
+    <li><strong>UI preferences:</strong> 12/24-hour clock format, widget visibility toggles, particle effects on/off.</li>
+    <li><strong>Background cache:</strong> Today's chosen background URL and attribution, refreshed daily.</li>
+    <li><strong>Custom wallpaper:</strong> If you upload a personal image, it is stored as a base64 data URL in your browser's local storage and never leaves your device.</li>
+    <li><strong>Quote cache:</strong> The day's inspiration quote, refreshed daily.</li>
+    <li><strong>Weather cache:</strong> Your last known weather result (temperature, condition, city), refreshed every 15 minutes or when you move more than 1 km.</li>
+    <li><strong>Quick links:</strong> URLs and labels you manually add to the quick links bar.</li>
+    <li><strong>Sticky notes:</strong> The text content, position, size, and color of each note you create.</li>
+    <li><strong>To-do list:</strong> Task text and completion state for your checklist items.</li>
+    <li><strong>World clock cities:</strong> City names and IANA timezone strings you add to the World Clock widget.</li>
+    <li><strong>Timer state:</strong> Paused/running state, remaining time, and mode for the Pomodoro Timer and Countdown Timer, so they survive tab refreshes.</li>
+    <li><strong>Widget positions:</strong> The screen coordinates of each draggable widget so they reopen where you left them.</li>
+    <li><strong>Focus sounds:</strong> Your last selected ambient sound and volume level.</li>
   </ul>
+  <p>All of this data lives exclusively in your browser. You can clear it at any time via your browser's "Clear site data" option.</p>
 
   <h2>6. No Remote Code Execution</h2>
   <p>In compliance with Chrome Web Store safety standards, Zen New Tab <strong>does not</strong> execute remote code. All APIs return structured JSON data only. No scripts, <code>eval()</code>, or executable content is ever fetched from external sources.</p>
 
   <h2>7. Third-Party Services</h2>
-  <p>If you click on photographer credits, you may be directed to <a href="https://unsplash.com/privacy" target="_blank">Unsplash</a>. We recommend reviewing their respective privacy policy.</p>
+  <p>Zen New Tab interacts with the following third-party services, each accessed only for the specific purpose described:</p>
+  <ul>
+    <li><strong>Unsplash / Lorem Picsum</strong> — background imagery. If you click a photographer credit, you may be directed to their respective sites. See <a href="https://unsplash.com/privacy" target="_blank">Unsplash's privacy policy</a>.</li>
+    <li><strong>Open-Meteo</strong> — weather data and timezone lookups. Open-Meteo is a free, open-source API that does not require an account or track users. See <a href="https://open-meteo.com/en/terms" target="_blank">Open-Meteo terms</a>.</li>
+    <li><strong>Nominatim / OpenStreetMap</strong> — reverse geocoding (weather city name) and forward geocoding (World Clock city lookup). Nominatim is operated by the OpenStreetMap Foundation. See <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank">OSM Foundation Privacy Policy</a>.</li>
+    <li><strong>Quote APIs</strong> (ZenQuotes, TypeFit, Forismatic, DummyJSON, FreeAPI, Quotes-DB) — daily inspirational quotes. Only a random quote is fetched; no user data is sent.</li>
+  </ul>
 
-  <h2>8. Contact</h2>
-  <p>If you have any questions regarding this policy or the Zen New Tab experience, please reach out to the developer at: <a href="mailto:geanpaulo@mail.com">geanpaulo@mail.com</a>.</p>
+  <h2>8. Audio — Focus Sounds</h2>
+  <p>The Focus Sounds feature generates ambient noise (rain, wind, ocean, fire, white noise, brown noise) entirely within your browser using the Web Audio API. No audio data is recorded, transmitted, or stored. The only things saved to local storage are your chosen sound preference and volume level.</p>
+
+  <h2>9. Contact</h2>
+  <p>If you have any questions regarding this policy or the Zen New Tab experience, please reach out to the developer at: <a href="mailto:hello@geanpaulo.com">hello@geanpaulo.com</a>.</p>
 
   <footer>
-    &copy; 2026 <a href="https://zen.geanpaulo.com" target="_blank">Zen New Tab</a>. Built with a focus on simplicity and privacy.
-  </footer>
-</body>
-</html>
+    &copy; 2026 <a href="h
