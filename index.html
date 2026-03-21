@@ -4,37 +4,26 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Zen New Tab — Chrome Extension</title>
+  <title>Zen New Tab — Minimalist Chrome Extension</title>
 
-  <!-- Primary SEO -->
-  <meta name="description" content="Zen New Tab transforms your browser's start page into a unified, distraction-free sanctuary. Minimal, calming new tab with time, quotes, backgrounds, weather, and search." />
-  <meta name="keywords" content="Zen New Tab, Chrome Extension, Minimal Dashboard, Productivity, Quotes, Weather, Backgrounds, Quick Search" />
+  <meta name="description" content="Zen New Tab transforms your browser's start page into a unified, distraction-free sanctuary. Minimal, calming new tab with time, quotes, backgrounds, weather, search, and productivity mini-apps." />
+  <meta name="keywords" content="Zen New Tab, Chrome Extension, Minimal Dashboard, Productivity, Pomodoro, World Clock, Focus Sounds, Quotes, Weather" />
   <meta name="author" content="Gean Paulo" />
   <meta name="robots" content="index, follow" />
-
-  <!-- Canonical -->
   <link rel="canonical" href="https://zen.geanpaulo.com/" />
 
-  <!-- Sitemap hint -->
-  <link rel="sitemap" type="application/xml" href="https://zen.geanpaulo.com/sitemap.xml" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Zen New Tab — Chrome Extension" />
+  <meta property="og:title" content="Zen New Tab — Minimalist Chrome Extension" />
   <meta property="og:description" content="Zen New Tab transforms your browser's start page into a unified, distraction-free sanctuary." />
   <meta property="og:image" content="https://zen.geanpaulo.com/assets/zenopengraph.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://zen.geanpaulo.com/" />
-
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Zen New Tab — Chrome Extension" />
+  <meta name="twitter:title" content="Zen New Tab — Minimalist Chrome Extension" />
   <meta name="twitter:description" content="Zen New Tab transforms your browser's start page into a unified, distraction-free sanctuary." />
   <meta name="twitter:image" content="https://zen.geanpaulo.com/assets/zenopengraph.png" />
 
-  <!-- Favicon -->
   <link rel="icon" href="assets/zen.png" type="image/png" />
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -44,200 +33,866 @@
     "image": "https://zen.geanpaulo.com/assets/zenopengraph.png",
     "applicationCategory": "BrowserApplication",
     "operatingSystem": "Chrome",
-    "author": {
-      "@type": "Person",
-      "name": "Gean Paulo",
-      "url": "https://geanpaulo.com/"
-    },
+    "author": { "@type": "Person", "name": "Gean Paulo", "url": "https://geanpaulo.com/" },
     "description": "Zen New Tab transforms your browser's start page into a unified, distraction-free sanctuary."
   }
   </script>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;600;700&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          colors: { zenblue: '#4286de', zenslate: '#0f172a' },
-          fontFamily: { sans: ['Lexend Deca', 'Manrope', 'ui-sans-serif', 'system-ui'] }
+          colors: {
+            ink: '#0a0c10',
+            zenblue: '#4f8ef7',
+            zencyan: '#5ee7df',
+          },
+          fontFamily: {
+            sans: ['"DM Sans"', 'ui-sans-serif', 'system-ui'],
+            display: ['"DM Serif Display"', 'Georgia', 'serif'],
+          },
         }
       }
     }
   </script>
 
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
   <style>
-    .screenshot {
-      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,250,250,0.95));
-      border-radius: 1rem;
-      box-shadow: 0 6px 18px rgba(15,23,42,0.08);
-      border: 1px solid rgba(15,23,42,0.04);
+    :root {
+      --ink: #0a0c10;
+      --glass-border: rgba(255,255,255,0.09);
+      --glass-border-hover: rgba(255,255,255,0.18);
     }
-    @media (max-width: 640px) { .screenshot { min-height: 260px; } }
-    #prevBtn, #nextBtn { transition: opacity 0.3s, transform 0.3s; }
-    #prevBtn:hover, #nextBtn:hover { transform: scale(1.1); }
-    .rounded-xl { border-radius: 1rem !important; }
-    .rounded-lg { border-radius: 0.75rem !important; }
-    .shadow-md { box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important; }
+
+    html, body { background: var(--ink); color: #e2e4ec; }
+
+    /* Aurora blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      will-change: transform;
+    }
+    .blob-a {
+      width: 650px; height: 650px;
+      background: radial-gradient(circle, rgba(79,142,247,0.16) 0%, transparent 70%);
+      top: -150px; left: -120px;
+      animation: driftA 30s ease-in-out infinite;
+    }
+    .blob-b {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(94,231,223,0.11) 0%, transparent 70%);
+      top: 35%; right: -100px;
+      animation: driftB 36s ease-in-out infinite;
+    }
+    .blob-c {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(170,110,255,0.09) 0%, transparent 70%);
+      bottom: 15%; left: 25%;
+      animation: driftC 24s ease-in-out infinite;
+    }
+
+    @keyframes driftA {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(70px,50px) scale(1.06); }
+      66%      { transform: translate(-40px,90px) scale(0.94); }
+    }
+    @keyframes driftB {
+      0%,100% { transform: translate(0,0) scale(1); }
+      40%     { transform: translate(-90px,-60px) scale(1.08); }
+      75%     { transform: translate(50px,40px) scale(0.96); }
+    }
+    @keyframes driftC {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50%     { transform: translate(60px,-70px) scale(1.1); }
+    }
+
+    /* Grain */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.022;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Glass card */
+    .glass-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .glass-card:hover {
+      border-color: var(--glass-border-hover);
+      background: rgba(255,255,255,0.065);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 55px rgba(0,0,0,0.35);
+    }
+
+    /* Nav — floating pill */
+    #site-nav {
+      top: 16px;
+      left: 0;
+      right: 0;
+      padding: 0;
+      background: transparent;
+      pointer-events: none;
+    }
+    #site-nav .nav-pill {
+      max-width: calc(72rem - 3rem); /* 72rem (max-w-6xl) minus 1.5rem px-6 each side */
+      margin: 0 auto;
+      background: rgba(14,16,22,0.78);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 0 0.5px rgba(255,255,255,0.04);
+      pointer-events: auto;
+      /* On smaller screens, match the px-6 gutters */
+      width: calc(100% - 3rem);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, #4f8ef7 0%, #5ee7df 100%);
+      color: #0a0c10;
+      font-weight: 600;
+      border-radius: 14px;
+      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 8px 30px rgba(79,142,247,0.35);
+    }
+    .btn-primary:active { transform: scale(0.98); }
+
+    .btn-ghost {
+      border: 1px solid rgba(255,255,255,0.13);
+      color: rgba(255,255,255,0.6);
+      border-radius: 14px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.3);
+      color: #fff;
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* Bento */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+    .b-8  { grid-column: span 8; }
+    .b-4  { grid-column: span 4; }
+    .b-6  { grid-column: span 6; }
+    .b-4s { grid-column: span 4; }
+    .b-3  { grid-column: span 3; }
+    .r-2  { grid-row: span 2; }
+
+    @media (max-width: 1024px) {
+      .b-8, .b-4, .b-6, .b-4s { grid-column: span 12; }
+      .b-3  { grid-column: span 6; }
+      .r-2  { grid-row: span 1; }
+    }
+    @media (max-width: 640px) {
+      .b-3  { grid-column: span 12; }
+    }
+
+    /* Image placeholder */
+    .img-ph {
+      background: rgba(255,255,255,0.025);
+      border: 1px dashed rgba(255,255,255,0.08);
+      border-radius: 14px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.18);
+      font-size: 0.68rem; letter-spacing: 0.07em; text-transform: uppercase;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* Browser chrome */
+    .browser-chrome {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .browser-bar {
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 10px 14px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .b-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .b-url { flex:1; background: rgba(255,255,255,0.05); border-radius: 5px; height: 18px; margin: 0 10px; }
+
+    /* Feature icon */
+    .fi {
+      width: 40px; height: 40px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(79,142,247,0.18), rgba(94,231,223,0.09));
+      border: 1px solid rgba(79,142,247,0.22);
+      display: flex; align-items: center; justify-content: center;
+      color: #7eb8ff; flex-shrink: 0;
+    }
+
+    /* Divider */
+    .zen-rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; }
+    .d5 { transition-delay: 0.40s; }
+
+    /* Ticker */
+    .ticker-wrap { overflow: hidden; }
+    .ticker-inner { display: flex; gap: 10px; animation: tickerScroll 32s linear infinite; width: max-content; }
+    @keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 999px; padding: 4px 12px;
+      font-size: 0.7rem; color: rgba(255,255,255,0.45); white-space: nowrap;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--ink); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
   </style>
 </head>
 
-<body class="bg-white text-zenslate antialiased font-sans transition-colors duration-200">
-<div id="page" class="min-h-screen flex flex-col">
+<body class="antialiased overflow-x-hidden font-sans">
 
-  <!-- NAV / HERO -->
-  <header class="bg-gradient-to-r from-zenblue/10 to-white border-b border-gray-100">
-    <div class="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-zenblue/50 to-zenblue/20 flex items-center justify-center shadow-md">
-          <img src="assets/zen.png" alt="Zen New Tab logo" class="w-8 h-8" />
-        </div>
-        <div>
-          <h1 class="text-lg font-semibold leading-tight">Zen New Tab</h1>
-          <p class="text-xs text-slate-600">Minimal • Calm • Productive</p>
-        </div>
+<!-- Aurora -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none" style="z-index:0;">
+  <div class="blob blob-a"></div>
+  <div class="blob blob-b"></div>
+  <div class="blob blob-c"></div>
+</div>
+
+<!-- ── NAV ── -->
+<nav id="site-nav" class="fixed z-50">
+  <div class="nav-pill">
+    <div class="flex items-center justify-between gap-4 px-6 py-2.5 w-full">
+      <!-- Logo -->
+      <div class="flex items-center gap-2.5 flex-shrink-0">
+        <img src="assets/128.png" alt="Zen New Tab" class="w-6 h-6 rounded-lg" onerror="this.style.display='none'" />
+        <span class="font-semibold text-sm text-white/85">Zen New Tab</span>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="https://chromewebstore.google.com/detail/chhlgdhacpabpphphdhjicnpbpklpdbk?utm_source=item-share-cb" target="_blank" rel="noopener noreferrer" 
-           class="bg-zenblue hover:bg-zenblue/80 text-white font-semibold py-2 px-4 rounded-xl shadow-md text-sm transition">Install Extension</a>
+      <!-- Links — hidden on mobile -->
+      <div class="hidden md:flex items-center gap-7 text-sm text-white/40">
+        <a href="#features" class="hover:text-white/80 transition-colors">Features</a>
+        <a href="#philosophy" class="hover:text-white/80 transition-colors">Philosophy</a>
+        <a href="#screenshots" class="hover:text-white/80 transition-colors">Preview</a>
+        <a href="#faq" class="hover:text-white/80 transition-colors">FAQ</a>
+      </div>
+      <!-- CTA -->
+      <a href="https://chromewebstore.google.com/detail/chhlgdhacpabpphphdhjicnpbpklpdbk?utm_source=item-share-cb"
+         target="_blank" rel="noopener noreferrer"
+         class="btn-primary text-xs py-1.5 px-4 inline-flex items-center gap-1.5 flex-shrink-0">
+        <i data-lucide="chrome" class="w-3.5 h-3.5"></i>
+        <span class="hidden sm:inline">Add to Chrome</span>
+        <span class="sm:hidden">Install</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="relative min-h-screen flex flex-col items-center justify-center px-6 pt-36 pb-20" style="z-index:1;">
+  <div class="max-w-4xl mx-auto w-full text-center">
+
+    <!-- Badge -->
+    <div class="reveal inline-flex items-center gap-2 mb-7 px-4 py-1.5 rounded-full text-xs font-medium tracking-widest uppercase"
+         style="background:rgba(79,142,247,0.09);border:1px solid rgba(79,142,247,0.22);color:#7eb8ff;letter-spacing:0.1em;">
+      <span class="w-1.5 h-1.5 rounded-full inline-block" style="background:#5ee7df;animation:pulse 3s ease-in-out infinite;"></span>
+      Chrome Extension &nbsp;·&nbsp; v2.0 Now Live
+    </div>
+
+    <!-- Headline -->
+    <h1 class="reveal d1 font-display text-5xl md:text-[4.5rem] font-normal leading-[1.06] tracking-tight text-white mb-6">
+      Your browser's new<br/>
+      <span style="background:linear-gradient(130deg,#a8c8ff 20%,#5ee7df 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:italic;">
+        quiet place.
+      </span>
+    </h1>
+
+    <!-- Sub -->
+    <p class="reveal d2 text-lg text-white/40 max-w-xl mx-auto leading-relaxed mb-10 font-light">
+      A distraction-free dashboard that replaces your start page. Ambient backgrounds, daily inspiration, live weather, and a full suite of focus tools. All in one tab.
+    </p>
+
+    <!-- CTAs -->
+    <div class="reveal d3 flex flex-col sm:flex-row items-center justify-center gap-3 mb-16">
+      <a href="https://chromewebstore.google.com/detail/chhlgdhacpabpphphdhjicnpbpklpdbk?utm_source=item-share-cb"
+         target="_blank" rel="noopener noreferrer"
+         class="btn-primary py-3.5 px-8 text-sm inline-flex items-center gap-2.5">
+        <i data-lucide="chrome" class="w-4 h-4"></i>
+        Add to Chrome. It's Free
+      </a>
+      <a href="#features" class="btn-ghost py-3.5 px-7 text-sm inline-flex items-center gap-2">
+        Explore features
+        <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+      </a>
+    </div>
+
+    <!-- Browser mockup -->
+    <div class="reveal d4 browser-chrome w-full max-w-3xl mx-auto">
+      <div class="browser-bar">
+        <div class="b-dot" style="background:#ff5f57;"></div>
+        <div class="b-dot" style="background:#ffbd2e;"></div>
+        <div class="b-dot" style="background:#28c840;"></div>
+        <div class="b-url"></div>
+        <div style="width:14px;height:14px;background:rgba(255,255,255,0.05);border-radius:3px;"></div>
+      </div>
+      <img src="assets/zentab.png" alt="Zen New Tab dashboard preview" class="w-full h-auto block"
+           onerror="this.outerHTML='<div class=\'img-ph\' style=\'height:400px;\'><svg xmlns=\'http://www.w3.org/2000/svg\' width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><rect width=\'20\' height=\'14\' x=\'2\' y=\'3\' rx=\'2\'/><line x1=\'8\' x2=\'16\' y1=\'21\' y2=\'21\'/><line x1=\'12\' x2=\'12\' y1=\'17\' y2=\'21\'/></svg><span>Hero Screenshot · assets/zentab.png</span></div>'" />
+    </div>
+
+    <!-- Trust row -->
+    <div class="reveal d5 flex flex-wrap items-center justify-center gap-5 mt-9 text-xs text-white/25">
+      <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-3.5 h-3.5" style="color:rgba(94,231,223,0.5);"></i> No data collected</span>
+      <span class="w-px h-3" style="background:rgba(255,255,255,0.1);"></span>
+      <span class="flex items-center gap-1.5"><i data-lucide="wifi-off" class="w-3.5 h-3.5" style="color:rgba(94,231,223,0.5);"></i> Works offline</span>
+      <span class="w-px h-3" style="background:rgba(255,255,255,0.1);"></span>
+      <span class="flex items-center gap-1.5"><i data-lucide="zap" class="w-3.5 h-3.5" style="color:rgba(94,231,223,0.5);"></i> Free forever</span>
+      <span class="w-px h-3" style="background:rgba(255,255,255,0.1);"></span>
+      <span class="flex items-center gap-1.5"><i data-lucide="lock" class="w-3.5 h-3.5" style="color:rgba(94,231,223,0.5);"></i> Open source</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div class="ticker-wrap py-3 border-y" style="border-color:rgba(255,255,255,0.055);background:rgba(255,255,255,0.018);z-index:1;position:relative;">
+  <div class="ticker-inner" id="ticker"></div>
+</div>
+
+<!-- ── BENTO FEATURES ── -->
+<section id="features" class="relative max-w-6xl mx-auto px-6 py-24" style="z-index:1;">
+  <div class="mb-14 reveal">
+    <p class="text-xs tracking-widest uppercase text-white/25 mb-3">Everything you need</p>
+    <h2 class="font-display text-4xl md:text-5xl font-normal text-white leading-tight">Built for how you<br/>actually work.</h2>
+  </div>
+
+  <div class="bento-grid">
+
+    <!-- MAIN DASHBOARD -->
+    <div class="b-8 r-2 glass-card rounded-2xl p-6 reveal flex flex-col gap-5">
+      <div>
+        <div class="fi mb-3"><i data-lucide="layout-dashboard" class="w-5 h-5"></i></div>
+        <h3 class="text-lg font-semibold text-white">The whole dashboard</h3>
+        <p class="text-sm text-white/38 mt-1.5 max-w-sm leading-relaxed">Time, weather, search, links, and quotes. All perfectly arranged on every new tab.</p>
+      </div>
+      <div class="flex-1 overflow-hidden -mx-6 -mb-6 md:mx-0 md:mb-0 md:rounded-xl rounded-b-2xl" style="min-height:220px;">
+        <img src="assets/1.png" alt="Full dashboard screenshot" class="w-full h-full object-cover"
+             onerror="this.outerHTML='<div class=\'img-ph rounded-xl\' style=\'height:220px;\'><svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><rect width=\'20\' height=\'14\' x=\'2\' y=\'3\' rx=\'2\'/></svg><span>Dashboard · assets/1.png</span></div>'" />
       </div>
     </div>
 
-    <div class="max-w-6xl mx-auto px-6 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div>
-          <h2 class="text-3xl md:text-4xl font-extrabold leading-tight">A unified minimalist dashboard featuring focused search and essential tools</h2>
-          <p class="mt-4 text-slate-600 max-w-xl">Zen New Tab transforms your browser's start page into a unified, distraction-free sanctuary. Designed to reduce digital clutter, the Zen dashboard harmonizes essential elements into a single interface.</p>
-          <div class="mt-6 flex items-center gap-4">
-            <a href="https://chromewebstore.google.com/detail/chhlgdhacpabpphphdhjicnpbpklpdbk?utm_source=item-share-cb" target="_blank" rel="noopener noreferrer"
-               class="bg-zenblue hover:bg-zenblue/80 text-white font-semibold py-3 px-6 rounded-xl shadow-lg inline-block transition">Install Now</a>
-            <a href="#features" class="text-sm text-slate-600 hover:underline">Learn more →</a>
+    <!-- FOCUS TOOLKIT -->
+    <div class="b-4 r-2 glass-card rounded-2xl p-6 reveal d1 flex flex-col gap-4">
+      <div class="fi" style="background:linear-gradient(135deg,rgba(180,100,255,0.18),rgba(100,150,255,0.1));border-color:rgba(160,100,255,0.25);color:#c09aff;">
+        <i data-lucide="brain-circuit" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <h3 class="text-base font-semibold text-white">Focus toolkit</h3>
+        <p class="text-xs text-white/38 mt-1">Everything to stay in the zone, built right into your tab.</p>
+      </div>
+      <div class="flex flex-col gap-2.5 flex-1">
+        <div class="glass-card rounded-xl p-3 flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center" style="background:rgba(255,100,80,0.14);border:1px solid rgba(255,100,80,0.22);">
+            <i data-lucide="timer" class="w-4 h-4" style="color:rgba(255,130,110,0.9);"></i>
           </div>
-          <div class="mt-6 text-xs text-slate-500">Free and open-source. Works seamlessly in all modern browsers with Chrome support.</div>
+          <div><div class="text-xs font-medium text-white/80">Pomodoro Timer</div><div class="text-xs text-white/32">Focus, Short & Long modes</div></div>
         </div>
-        <div class="flex justify-center md:justify-end">
-          <img src="assets/zentab.png" alt="Zen New Tab preview" class="w-full max-w-md md:max-w-lg lg:max-w-xl rounded-xl shadow-md object-cover" />
+        <div class="glass-card rounded-xl p-3 flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center" style="background:rgba(94,231,223,0.12);border:1px solid rgba(94,231,223,0.2);">
+            <i data-lucide="alarm-clock" class="w-4 h-4" style="color:rgba(94,231,223,0.9);"></i>
+          </div>
+          <div><div class="text-xs font-medium text-white/80">Countdown Timer</div><div class="text-xs text-white/32">Presets + custom alarm</div></div>
+        </div>
+        <div class="glass-card rounded-xl p-3 flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center" style="background:rgba(180,130,255,0.12);border:1px solid rgba(180,130,255,0.2);">
+            <i data-lucide="music-2" class="w-4 h-4" style="color:rgba(180,130,255,0.9);"></i>
+          </div>
+          <div><div class="text-xs font-medium text-white/80">Focus Sounds</div><div class="text-xs text-white/32">Rain, Ocean, Fire & more</div></div>
+        </div>
+        <div class="glass-card rounded-xl p-3 flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center" style="background:rgba(100,210,140,0.12);border:1px solid rgba(100,210,140,0.2);">
+            <i data-lucide="check-square" class="w-4 h-4" style="color:rgba(100,210,140,0.9);"></i>
+          </div>
+          <div><div class="text-xs font-medium text-white/80">To-do List</div><div class="text-xs text-white/32">Persistent checklist</div></div>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden" style="height:110px;">
+        <img src="assets/3.png" alt="Widgets screenshot" class="w-full h-full object-cover"
+             onerror="this.outerHTML='<div class=\'img-ph rounded-xl\' style=\'height:110px;\'><span>Widgets · assets/2.png</span></div>'" />
+      </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="b-6 glass-card rounded-2xl p-6 reveal d2 flex flex-col gap-4">
+      <div class="fi"><i data-lucide="search" class="w-5 h-5"></i></div>
+      <h3 class="text-base font-semibold text-white">Smart search with suggestions</h3>
+      <p class="text-sm text-white/38 leading-relaxed">Type and search from your default engine with real-time autocomplete. Ghost-text preview and keyboard navigation.</p>
+      <div class="rounded-xl p-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);">
+        <div class="flex items-center gap-3 rounded-full px-4 py-2.5" style="background:rgba(255,255,255,0.055);border:1px solid rgba(255,255,255,0.09);">
+          <i data-lucide="search" class="w-3.5 h-3.5 text-white/20 flex-shrink-0"></i>
+          <span class="text-sm text-white/20 font-light">Search the web and press Enter</span>
         </div>
       </div>
     </div>
-  </header>
 
-  <!-- FEATURES -->
-  <main class="flex-1">
-    <section id="features" class="max-w-6xl mx-auto px-6 py-12">
-      <h3 class="text-xl font-semibold">Features</h3>
-      <p class="text-slate-600 mt-2 max-w-2xl">Everything you need to stay productive while keeping your new tab minimal and calming.</p>
-
-      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="p-5 bg-white rounded-xl shadow-md border border-gray-100">
-          <div class="w-16 h-16 rounded-xl bg-zenblue/20 flex items-center justify-center mb-3">
-            <img src="assets/clock.png" alt="Time & Date icon" class="w-10 h-10" />
-          </div>
-          <h4 class="font-semibold">Time & Date</h4>
-          <p class="mt-2 text-sm text-slate-600">Quick glance at the current time and date in your preferred format.</p>
-        </div>
-
-        <div class="p-5 bg-white rounded-xl shadow-md border border-gray-100">
-          <div class="w-16 h-16 rounded-xl bg-zenblue/20 flex items-center justify-center mb-3">
-            <img src="assets/quote.png" alt="Quotes icon" class="w-10 h-10" />
-          </div>
-          <h4 class="font-semibold">Daily Quotes</h4>
-          <p class="mt-2 text-sm text-slate-600">Start your day with inspiring quotes directly on your new tab.</p>
-        </div>
-
-        <div class="p-5 bg-white rounded-xl shadow-md border border-gray-100">
-          <div class="w-16 h-16 rounded-xl bg-zenblue/20 flex items-center justify-center mb-3">
-            <img src="assets/backgrounds.png" alt="Backgrounds icon" class="w-10 h-10" />            
-          </div>
-          <h4 class="font-semibold">Beautiful Backgrounds</h4>
-          <p class="mt-2 text-sm text-slate-600">Rotating high-quality backgrounds to make your new tab visually appealing.</p>
-        </div>
-
-        <div class="p-5 bg-white rounded-xl shadow-md border border-gray-100">
-          <div class="w-16 h-16 rounded-xl bg-zenblue/20 flex items-center justify-center mb-3">
-            <img src="assets/weather.png" alt="Weather icon" class="w-10 h-10" /> 
-          </div>
-          <h4 class="font-semibold">Weather Updates</h4>
-          <p class="mt-2 text-sm text-slate-600">Check your current weather at a glance without leaving the tab.</p>
-        </div>
-
-        <div class="p-5 bg-white rounded-xl shadow-md border border-gray-100">
-          <div class="w-16 h-16 rounded-xl bg-zenblue/20 flex items-center justify-center mb-3">
-            <img src="assets/search.png" alt="Search icon" class="w-10 h-10" /> 
-          </div>
-          <h4 class="font-semibold">Quick Search</h4>
-          <p class="mt-2 text-sm text-slate-600">Search your favorite websites directly from the new tab, instantly.</p>
-        </div>
+    <!-- WEATHER -->
+    <div class="b-6 glass-card rounded-2xl p-6 reveal d3 flex flex-col gap-4">
+      <div class="fi" style="background:linear-gradient(135deg,rgba(255,200,80,0.14),rgba(255,140,50,0.08));border-color:rgba(255,200,80,0.2);color:#ffd07a;">
+        <i data-lucide="cloud-sun" class="w-5 h-5"></i>
       </div>
-    </section>
-
-    <!-- SCREENSHOTS CAROUSEL -->
-    <section id="screenshots" class="bg-gray-50 py-12">
-      <div class="max-w-6xl mx-auto px-6">
-        <h3 class="text-lg font-semibold mb-6 text-center">Screenshots</h3>
-        <div id="carouselContainer" class="overflow-hidden rounded-xl shadow-md relative group">
-          <img id="carouselImage" src="assets/1.png" alt="Zen New Tab screenshot" class="w-full object-contain transition duration-500" />
-          <button id="prevBtn" class="absolute top-1/2 left-3 -translate-y-1/2 bg-white/80 hover:bg-white/95 text-zenblue p-4 rounded-full shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span class="text-xl font-bold">&#10094;</span>
-          </button>
-          <button id="nextBtn" class="absolute top-1/2 right-3 -translate-y-1/2 bg-white/80 hover:bg-white/95 text-zenblue p-4 rounded-full shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span class="text-xl font-bold">&#10095;</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <script>
-      const images = ['assets/1.png','assets/2.png','assets/4.png'];
-      let currentIndex = 0;
-      const carouselImage = document.getElementById('carouselImage');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      function showImage(index){ carouselImage.src = images[index]; }
-      prevBtn.addEventListener('click',()=>{ currentIndex=(currentIndex-1+images.length)%images.length; showImage(currentIndex); });
-      nextBtn.addEventListener('click',()=>{ currentIndex=(currentIndex+1)%images.length; showImage(currentIndex); });
-    </script>
-
-    <!-- INSTALL -->
-    <section id="install" class="max-w-6xl mx-auto px-6 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <h3 class="text-base font-semibold text-white">Live local weather</h3>
+      <p class="text-sm text-white/38 leading-relaxed">Auto-detects your location. Cached for 15 minutes. Shows current conditions with emoji, temperature, and city name.</p>
+      <div class="flex items-center gap-3 mt-auto pt-1">
+        <span class="text-4xl">🌤️</span>
         <div>
-          <h3 class="text-2xl font-bold">Install Zen New Tab</h3>
-          <p class="mt-2 text-slate-600 max-w-xl">Free and open-source. Add Zen New Tab to Chrome and make your new tab productive and calm.</p>
-          <div class="mt-6 p-6 rounded-xl bg-white border border-gray-100 shadow-md">
-            <a href="https://chromewebstore.google.com/detail/chhlgdhacpabpphphdhjicnpbpklpdbk?utm_source=item-share-cb" target="_blank" rel="noopener noreferrer"
-               class="w-full block bg-zenblue hover:bg-zenblue/80 text-white font-semibold py-3 px-6 rounded-xl shadow text-center">Install Now</a>
-          </div>
-        </div>
-        <div>
-          <h4 class="font-semibold">How to use</h4>
-          <ol class="mt-3 text-sm text-slate-600 space-y-2 list-decimal list-inside">
-            <li>Click Install Now and open the Chrome Web Store page.</li>
-            <li>Add Zen New Tab to Chrome via "Add to Chrome".</li>
-            <li>Open a new tab to enjoy time, quotes, backgrounds, weather, and search instantly.</li>
-          </ol>
-          <div class="mt-6 text-xs text-slate-500">For help, contact <a href="mailto:geanpaulo@mail.com" class="underline">geanpaulo@mail.com</a>.</div>
+          <div class="text-2xl font-semibold text-white/85 leading-tight">28°C</div>
+          <div class="text-xs text-white/30 mt-0.5">Mostly clear · Manila, PH</div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
 
-<!-- FOOTER -->
-<footer class="bg-white border-t border-gray-100">
-  <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between text-sm text-slate-600 gap-2 sm:gap-0">
-    <div>© <span id="year"></span> Zen New Tab • Built by Gean Paulo</div>
-    <div class="flex gap-4">
-      <a href="/privacy.html" class="underline hover:text-zenblue">Privacy Policy</a>
-      <a href="/devinfo.html" class="underline hover:text-zenblue">Change Log</a>
-      <a href="https://geanpaulo.com/" class="underline hover:text-zenblue">Developer Website</a>
+    <!-- WORLD CLOCK -->
+    <div class="b-4s glass-card rounded-2xl p-6 reveal flex flex-col gap-3">
+      <div class="fi" style="background:rgba(100,170,255,0.11);border-color:rgba(100,170,255,0.2);color:#8ab8ff;">
+        <i data-lucide="globe-2" class="w-5 h-5"></i>
+      </div>
+      <h3 class="text-sm font-semibold text-white">World Clock</h3>
+      <p class="text-xs text-white/35 leading-relaxed">Up to 8 cities. Add any city by name and timezone lookup is automatic.</p>
+      <div class="flex flex-col gap-0.5 mt-1">
+        <div class="flex justify-between items-center py-1.5 border-b" style="border-color:rgba(255,255,255,0.05);">
+          <span class="text-xs text-white/45">New York</span>
+          <span class="text-xs font-semibold text-white/75 tabular-nums">08:41 AM</span>
+        </div>
+        <div class="flex justify-between items-center py-1.5 border-b" style="border-color:rgba(255,255,255,0.05);">
+          <span class="text-xs text-white/45">London</span>
+          <span class="text-xs font-semibold text-white/75 tabular-nums">01:41 PM</span>
+        </div>
+        <div class="flex justify-between items-center py-1.5">
+          <span class="text-xs text-white/45">Tokyo</span>
+          <span class="text-xs font-semibold text-white/75 tabular-nums">09:41 PM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALENDAR -->
+    <div class="b-4s glass-card rounded-2xl p-6 reveal d1 flex flex-col gap-3">
+      <div class="fi" style="background:rgba(255,100,130,0.1);border-color:rgba(255,100,130,0.18);color:#ff8aaa;">
+        <i data-lucide="calendar" class="w-5 h-5"></i>
+      </div>
+      <h3 class="text-sm font-semibold text-white">Calendar</h3>
+      <p class="text-xs text-white/35">Monthly view with today highlighted. Navigate any month at a glance.</p>
+      <div class="grid grid-cols-7 gap-0.5 mt-1 text-center">
+        <span class="text-[9px] text-white/22">Su</span><span class="text-[9px] text-white/22">Mo</span><span class="text-[9px] text-white/22">Tu</span><span class="text-[9px] text-white/22">We</span><span class="text-[9px] text-white/22">Th</span><span class="text-[9px] text-white/22">Fr</span><span class="text-[9px] text-white/22">Sa</span>
+        <span class="text-[10px] text-white/20 col-span-2"></span><span class="text-[10px] text-white/35">1</span><span class="text-[10px] text-white/35">2</span><span class="text-[10px] text-white/35">3</span><span class="text-[10px] text-white/35">4</span><span class="text-[10px] text-white/35">5</span>
+        <span class="text-[10px] text-white/35">6</span><span class="text-[10px] text-white/35">7</span><span class="text-[10px] text-white/35">8</span><span class="text-[10px] text-white/35">9</span><span class="text-[10px] text-white/35">10</span><span class="text-[10px] text-white/35">11</span><span class="text-[10px] text-white/35">12</span>
+        <span class="text-[10px] text-white/35">13</span><span class="text-[10px] text-white/35">14</span><span class="text-[10px] text-white/35">15</span><span class="text-[10px] text-white/35">16</span><span class="text-[10px] text-white/35">17</span><span class="text-[10px] text-white/35">18</span><span class="text-[10px] text-white/35">19</span>
+        <span class="text-[10px] text-white/35">20</span>
+        <span class="text-[10px] font-bold text-white flex items-center justify-center mx-auto rounded-full" style="width:18px;height:18px;background:rgba(79,142,247,0.28);">21</span>
+        <span class="text-[10px] text-white/35">22</span><span class="text-[10px] text-white/35">23</span><span class="text-[10px] text-white/35">24</span><span class="text-[10px] text-white/35">25</span><span class="text-[10px] text-white/35">26</span>
+      </div>
+    </div>
+
+    <!-- STICKY NOTES -->
+    <div class="b-4s glass-card rounded-2xl p-6 reveal d2 flex flex-col gap-3">
+      <div class="fi" style="background:rgba(255,214,80,0.11);border-color:rgba(255,214,80,0.2);color:#ffd97a;">
+        <i data-lucide="sticky-note" class="w-5 h-5"></i>
+      </div>
+      <h3 class="text-sm font-semibold text-white">Sticky Notes</h3>
+      <p class="text-xs text-white/35">Draggable frosted glass notes with jewel-toned colors. Resizable and saved between sessions.</p>
+      <div class="flex gap-2 mt-auto flex-wrap">
+        <div class="rounded-xl p-2.5 flex-1 min-w-0" style="background:rgba(255,214,80,0.1);border:1px solid rgba(255,214,80,0.2);">
+          <p class="text-xs text-white/60 truncate">Ship v2.0 🚀</p>
+        </div>
+        <div class="rounded-xl p-2.5 flex-1 min-w-0" style="background:rgba(90,170,255,0.1);border:1px solid rgba(90,170,255,0.2);">
+          <p class="text-xs text-white/60 truncate">Buy oat milk</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BACKGROUNDS -->
+    <div class="b-6 glass-card rounded-2xl overflow-hidden reveal d1 relative" style="min-height:200px;">
+      <img src="assets/5.png" alt="Beautiful backgrounds" class="absolute inset-0 w-full h-full object-cover opacity-35"
+           onerror="this.remove();" />
+      <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(10,12,16,0.75) 0%,rgba(10,12,16,0.3) 100%);"></div>
+      <div class="relative p-6 flex flex-col gap-3 h-full">
+        <div class="fi" style="background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.13);color:rgba(255,255,255,0.75);">
+          <i data-lucide="image" class="w-5 h-5"></i>
+        </div>
+        <h3 class="text-base font-semibold text-white">Beautiful backgrounds</h3>
+        <p class="text-sm text-white/45 leading-relaxed max-w-xs">Daily rotating photos from Unsplash and Picsum. Or upload your own, stored privately in your browser.</p>
+        <div class="flex gap-4 mt-2 text-xs text-white/30">
+          <span class="flex items-center gap-1"><i data-lucide="refresh-cw" class="w-3 h-3"></i> Daily refresh</span>
+          <span class="flex items-center gap-1"><i data-lucide="upload" class="w-3 h-3"></i> Custom wallpaper</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK LINKS + SETTINGS -->
+    <div class="b-6 glass-card rounded-2xl p-6 reveal d2 flex flex-col gap-4">
+      <div class="fi"><i data-lucide="settings-2" class="w-5 h-5"></i></div>
+      <h3 class="text-base font-semibold text-white">Quick Links &amp; Settings</h3>
+      <p class="text-sm text-white/38 leading-relaxed">Pin your most-visited sites for one-click access. Toggle every widget on or off from a unified settings panel.</p>
+      <div class="flex items-center gap-2 flex-wrap mt-auto pt-1">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);"><i data-lucide="mail" class="w-4 h-4 text-white/25"></i></div>
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);"><i data-lucide="github" class="w-4 h-4 text-white/25"></i></div>
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);"><i data-lucide="figma" class="w-4 h-4 text-white/25"></i></div>
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);"><i data-lucide="slack" class="w-4 h-4 text-white/25"></i></div>
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(79,142,247,0.1);border:1px dashed rgba(79,142,247,0.28);"><i data-lucide="plus" class="w-4 h-4" style="color:rgba(79,142,247,0.55);"></i></div>
+      </div>
+    </div>
+
+    <!-- QUOTES -->
+    <div class="b-3 glass-card rounded-2xl p-6 reveal flex flex-col gap-3">
+      <div class="fi" style="background:rgba(180,130,255,0.11);border-color:rgba(180,130,255,0.2);color:#c4a0ff;">
+        <i data-lucide="quote" class="w-5 h-5"></i>
+      </div>
+      <h3 class="text-sm font-semibold text-white">Daily Quotes</h3>
+      <p class="text-xs text-white/38 leading-relaxed italic font-light">"The present moment is the only moment available to us."</p>
+      <p class="text-xs text-white/20 mt-auto">— Thích Nhất Hạnh</p>
+    </div>
+
+    <!-- TIME -->
+    <div class="b-3 glass-card rounded-2xl p-6 reveal d1 flex flex-col gap-3">
+      <div class="fi"><i data-lucide="clock-4" class="w-5 h-5"></i></div>
+      <h3 class="text-sm font-semibold text-white">Time &amp; Date</h3>
+      <p class="text-xs text-white/35">12 or 24-hour. Smooth animated digit transitions every second.</p>
+      <div class="font-display text-4xl font-normal text-white/75 tracking-tight mt-auto">09:41</div>
+    </div>
+
+    <!-- PRIVACY -->
+    <div class="b-3 glass-card rounded-2xl p-6 reveal d2 flex flex-col gap-3" style="background:rgba(94,231,223,0.025);border-color:rgba(94,231,223,0.09);">
+      <div class="fi" style="background:rgba(94,231,223,0.1);border-color:rgba(94,231,223,0.22);color:#5ee7df;">
+        <i data-lucide="shield-check" class="w-5 h-5"></i>
+      </div>
+      <h3 class="text-sm font-semibold text-white">Private by default</h3>
+      <p class="text-xs text-white/35 leading-relaxed">Zero tracking. No ads. All data stays in your browser and never leaves your device.</p>
+    </div>
+
+    <!-- AUDIO -->
+    <div class="b-3 glass-card rounded-2xl p-6 reveal d3 flex flex-col gap-3">
+      <div class="fi" style="background:rgba(100,200,140,0.1);border-color:rgba(100,200,140,0.2);color:#76d8a0;">
+        <i data-lucide="volume-2" class="w-5 h-5"></i>
+      </div>
+      <h3 class="text-sm font-semibold text-white">Offline audio</h3>
+      <p class="text-xs text-white/35">Generated in your browser via Web Audio API. No downloads needed.</p>
+      <div class="flex gap-1.5 flex-wrap mt-auto">
+        <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.35);">🌧 Rain</span>
+        <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.35);">🌊 Ocean</span>
+        <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.35);">🔥 Fire</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="zen-rule max-w-6xl mx-auto" style="z-index:1;position:relative;"></div>
+
+<!-- ── SCREENSHOTS ── -->
+<section id="screenshots" class="relative max-w-6xl mx-auto px-6 py-24" style="z-index:1;">
+  <div class="mb-12 reveal text-center">
+    <p class="text-xs tracking-widest uppercase text-white/25 mb-3">Screenshots</p>
+    <h2 class="font-display text-4xl font-normal text-white">See it in action.</h2>
+  </div>
+
+  <div class="reveal d1">
+    <div class="browser-chrome">
+      <div class="browser-bar">
+        <div class="b-dot" style="background:#ff5f57;"></div>
+        <div class="b-dot" style="background:#ffbd2e;"></div>
+        <div class="b-dot" style="background:#28c840;"></div>
+        <div class="b-url"></div>
+      </div>
+      <div style="background:#0d0f14;overflow:hidden;">
+        <img id="carousel-img" src="assets/1.png" alt="Screenshot"
+             class="w-full h-auto block" style="transition:opacity 0.4s ease;"
+             onerror="this.outerHTML='<div class=\'img-ph\' style=\'height:320px;\'><span>Screenshot · assets/1.png</span></div>'" />
+      </div>
+    </div>
+
+    <div class="flex items-center justify-center gap-4 mt-7">
+      <button onclick="carouselPrev()" class="btn-ghost w-10 h-10 rounded-full flex items-center justify-center">
+        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+      </button>
+      <div id="carousel-dots" class="flex gap-2"></div>
+      <button onclick="carouselNext()" class="btn-ghost w-10 h-10 rounded-full flex items-center justify-center">
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="zen-rule max-w-6xl mx-auto" style="z-index:1;position:relative;"></div>
+
+<!-- ── PHILOSOPHY ── -->
+<section id="philosophy" class="relative max-w-4xl mx-auto px-6 py-28 text-center" style="z-index:1;">
+  <div class="reveal">
+    <p class="text-xs tracking-widest uppercase text-white/22 mb-6">Philosophy</p>
+    <h2 class="font-display text-4xl md:text-5xl font-normal text-white leading-tight mb-8">
+      A tab that asks nothing of you<br/>
+      <span class="italic text-white/45">except your attention.</span>
+    </h2>
+  </div>
+  <div class="reveal d1 space-y-5 text-white/40 leading-relaxed text-base font-light max-w-2xl mx-auto">
+    <p>Most productivity tools add friction. They ask you to log in, configure projects, organize hierarchies. They compete for your focus before you've even started work.</p>
+    <p>Zen New Tab is the opposite. It appears in a moment of transition, when you open a new tab, and asks only one question: <span class="text-white/65 italic">what matters right now?</span></p>
+    <p>The clock grounds you in the present. The quote sets a tone. The background gives your eyes somewhere calm to rest. Everything else is optional, draggable, dismissible. Yours.</p>
+  </div>
+
+  <div class="reveal d2 grid grid-cols-1 sm:grid-cols-3 gap-5 mt-16">
+    <div class="glass-card rounded-2xl p-7 text-center">
+      <div class="text-2xl mb-4">✦</div>
+      <h3 class="text-sm font-semibold text-white/80 mb-2">Minimal by design</h3>
+      <p class="text-xs text-white/30 leading-relaxed">Every pixel earns its place. Nothing decorative without purpose.</p>
+    </div>
+    <div class="glass-card rounded-2xl p-7 text-center">
+      <div class="text-2xl mb-4">◈</div>
+      <h3 class="text-sm font-semibold text-white/80 mb-2">Private by default</h3>
+      <p class="text-xs text-white/30 leading-relaxed">No accounts, no telemetry, no ads. All data lives in your browser.</p>
+    </div>
+    <div class="glass-card rounded-2xl p-7 text-center">
+      <div class="text-2xl mb-4">⊹</div>
+      <h3 class="text-sm font-semibold text-white/80 mb-2">Yours to shape</h3>
+      <p class="text-xs text-white/30 leading-relaxed">Toggle every feature on or off. Drag widgets anywhere. Your tab, your rules.</p>
+    </div>
+  </div>
+</section>
+
+<div class="zen-rule max-w-6xl mx-auto" style="z-index:1;position:relative;"></div>
+
+<!-- ── FAQ ── -->
+<section id="faq" class="relative max-w-6xl mx-auto px-6 py-24" style="z-index:1;">
+  <div class="mb-14 reveal text-center">
+    <p class="text-xs tracking-widest uppercase text-white/25 mb-3">FAQ</p>
+    <h2 class="font-display text-4xl font-normal text-white">Common questions.</h2>
+  </div>
+
+  <div class="max-w-2xl mx-auto flex flex-col gap-3" id="faq-list">
+
+    <div class="faq-item glass-card rounded-2xl overflow-hidden reveal">
+      <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between gap-4" onclick="toggleFaq(this)">
+        <span class="text-sm font-medium text-white/85">Is Zen New Tab completely free?</span>
+        <i data-lucide="plus" class="w-4 h-4 text-white/35 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+      </button>
+      <div class="faq-body hidden px-6 pb-5">
+        <p class="text-sm text-white/45 leading-relaxed">Yes, entirely free. No subscription, no premium tier, no hidden costs. It's open-source and will stay that way.</p>
+      </div>
+    </div>
+
+    <div class="faq-item glass-card rounded-2xl overflow-hidden reveal d1">
+      <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between gap-4" onclick="toggleFaq(this)">
+        <span class="text-sm font-medium text-white/85">Does it collect any of my data?</span>
+        <i data-lucide="plus" class="w-4 h-4 text-white/35 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+      </button>
+      <div class="faq-body hidden px-6 pb-5">
+        <p class="text-sm text-white/45 leading-relaxed">No. Zen New Tab does not track you, collect personal information, or send anything to a server. Your notes, tasks, preferences, and wallpaper all live exclusively in your browser's local storage.</p>
+      </div>
+    </div>
+
+    <div class="faq-item glass-card rounded-2xl overflow-hidden reveal d2">
+      <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between gap-4" onclick="toggleFaq(this)">
+        <span class="text-sm font-medium text-white/85">Which browsers does it support?</span>
+        <i data-lucide="plus" class="w-4 h-4 text-white/35 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+      </button>
+      <div class="faq-body hidden px-6 pb-5">
+        <p class="text-sm text-white/45 leading-relaxed">Zen New Tab is built for Chrome and all Chromium-based browsers including Brave, Edge, and Arc. It is available on the Chrome Web Store.</p>
+      </div>
+    </div>
+
+    <div class="faq-item glass-card rounded-2xl overflow-hidden reveal d3">
+      <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between gap-4" onclick="toggleFaq(this)">
+        <span class="text-sm font-medium text-white/85">Can I use my own wallpaper?</span>
+        <i data-lucide="plus" class="w-4 h-4 text-white/35 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+      </button>
+      <div class="faq-body hidden px-6 pb-5">
+        <p class="text-sm text-white/45 leading-relaxed">Yes. You can upload any JPG, PNG, or WebP image as a custom wallpaper. It is stored directly in your browser and never uploaded anywhere.</p>
+      </div>
+    </div>
+
+    <div class="faq-item glass-card rounded-2xl overflow-hidden reveal d4">
+      <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between gap-4" onclick="toggleFaq(this)">
+        <span class="text-sm font-medium text-white/85">Do the Focus Sounds work offline?</span>
+        <i data-lucide="plus" class="w-4 h-4 text-white/35 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+      </button>
+      <div class="faq-body hidden px-6 pb-5">
+        <p class="text-sm text-white/45 leading-relaxed">Yes. All ambient sounds are generated locally using the Web Audio API. No files are downloaded and no internet connection is needed to use them.</p>
+      </div>
+    </div>
+
+    <div class="faq-item glass-card rounded-2xl overflow-hidden reveal d5">
+      <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between gap-4" onclick="toggleFaq(this)">
+        <span class="text-sm font-medium text-white/85">Will my widgets and notes be saved if I close the browser?</span>
+        <i data-lucide="plus" class="w-4 h-4 text-white/35 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+      </button>
+      <div class="faq-body hidden px-6 pb-5">
+        <p class="text-sm text-white/45 leading-relaxed">Yes. Everything is persisted to your browser's local storage — sticky notes, tasks, widget positions, timer states, world clock cities, and all your preferences are restored exactly as you left them.</p>
+      </div>
+    </div>
+
+    <div class="faq-item glass-card rounded-2xl overflow-hidden reveal">
+      <button class="faq-btn w-full text-left px-6 py-5 flex items-center justify-between gap-4" onclick="toggleFaq(this)">
+        <span class="text-sm font-medium text-white/85">How do I turn off widgets I don't need?</span>
+        <i data-lucide="plus" class="w-4 h-4 text-white/35 flex-shrink-0 faq-icon transition-transform duration-300"></i>
+      </button>
+      <div class="faq-body hidden px-6 pb-5">
+        <p class="text-sm text-white/45 leading-relaxed">Click the settings icon in the bottom-left corner. Every widget has its own toggle switch so you can enable only what you actually use.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="zen-rule max-w-6xl mx-auto" style="z-index:1;position:relative;"></div>
+
+<!-- ── FINAL CTA ── -->
+<section class="relative max-w-4xl mx-auto px-6 py-28 text-center" style="z-index:1;">
+  <div class="glass-card rounded-3xl p-12 md:p-16 reveal" style="background:rgba(79,142,247,0.035);border-color:rgba(79,142,247,0.13);">
+    <p class="text-xs tracking-widest uppercase mb-4" style="color:rgba(79,142,247,0.6);letter-spacing:0.12em;">Get started</p>
+    <h2 class="font-display text-4xl md:text-5xl font-normal text-white mb-4">Ready for a calmer tab?</h2>
+    <p class="text-white/35 mb-10 text-base font-light max-w-sm mx-auto">Free, open-source, and installs in seconds. No account required.</p>
+    <a href="https://chromewebstore.google.com/detail/chhlgdhacpabpphphdhjicnpbpklpdbk?utm_source=item-share-cb"
+       target="_blank" rel="noopener noreferrer"
+       class="btn-primary py-4 px-10 text-sm inline-flex items-center gap-2.5 mx-auto">
+      <i data-lucide="chrome" class="w-4 h-4"></i>
+      Install Zen New Tab
+    </a>
+    <div class="mt-7 flex flex-wrap items-center justify-center gap-5 text-xs text-white/20">
+      <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-3 h-3" style="color:rgba(94,231,223,0.5);"></i> Free forever</span>
+      <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-3 h-3" style="color:rgba(94,231,223,0.5);"></i> No account needed</span>
+      <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-3 h-3" style="color:rgba(94,231,223,0.5);"></i> Chrome Web Store</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="relative" style="z-index:1;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="py-10 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-white/22 border-t" style="border-color:rgba(255,255,255,0.055);">
+      <div class="flex items-center gap-2.5">
+        <img src="assets/zen.png" alt="" class="w-5 h-5 rounded opacity-40" onerror="this.remove();" />
+        <span>© <span id="footer-year"></span> Zen New Tab &nbsp;·&nbsp; Built by
+          <a href="https://geanpaulo.com" target="_blank" rel="noopener noreferrer"
+             class="hover:text-white/55 transition-colors underline underline-offset-2">Gean Paulo</a>
+        </span>
+      </div>
+      <div class="flex items-center gap-5">
+        <a href="/privacy.html" class="hover:text-white/55 transition-colors">Privacy Policy</a>
+        <a href="/devinfo.html" class="hover:text-white/55 transition-colors">Changelog</a>
+        <a href="https://geanpaulo.com" target="_blank" rel="noopener noreferrer" class="hover:text-white/55 transition-colors">Developer</a>
+        <a href="mailto:hello@geanpaulo.com" class="hover:text-white/55 transition-colors">Contact</a>
+      </div>
     </div>
   </div>
 </footer>
 
-</div>
-<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+<script>
+  lucide.createIcons();
+
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  // Ticker
+  const tickerItems = [
+    ['clock','Time & Date'],['search','Smart Search'],['cloud-sun','Live Weather'],
+    ['quote','Daily Quotes'],['image','Ambient Backgrounds'],['timer','Pomodoro Timer'],
+    ['globe-2','World Clock'],['check-square','To-do List'],['alarm-clock','Countdown Timer'],
+    ['calendar','Calendar'],['music-2','Focus Sounds'],['sticky-note','Sticky Notes'],
+    ['link','Quick Links'],['wallpaper','Custom Wallpaper'],['sparkles','Particles'],['settings','Settings Modal']
+  ];
+  const ticker = document.getElementById('ticker');
+  if (ticker) {
+    const html = [...tickerItems, ...tickerItems].map(([icon, label]) =>
+      `<span class="badge"><i data-lucide="${icon}" style="width:12px;height:12px;"></i> ${label}</span>`
+    ).join('');
+    ticker.innerHTML = html;
+    lucide.createIcons();
+  }
+
+  // Carousel
+  const carouselImages = ['assets/1.png','assets/2.png','assets/4.png'];
+  let ci = 0;
+
+  function carouselShow(i) {
+    const img = document.getElementById('carousel-img');
+    if (!img) return;
+    img.style.opacity = '0';
+    setTimeout(() => { img.src = carouselImages[i]; img.style.opacity = '1'; }, 300);
+    document.querySelectorAll('.cdot').forEach((d, idx) => {
+      d.style.background = idx === i ? 'rgba(79,142,247,0.85)' : 'rgba(255,255,255,0.13)';
+      d.style.transform = idx === i ? 'scale(1.3)' : 'scale(1)';
+    });
+  }
+
+  function carouselNext() { ci = (ci + 1) % carouselImages.length; carouselShow(ci); }
+  function carouselPrev() { ci = (ci - 1 + carouselImages.length) % carouselImages.length; carouselShow(ci); }
+
+  const dotsEl = document.getElementById('carousel-dots');
+  if (dotsEl) {
+    carouselImages.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'cdot w-2 h-2 rounded-full transition-all';
+      d.style.background = i === 0 ? 'rgba(79,142,247,0.85)' : 'rgba(255,255,255,0.13)';
+      d.onclick = () => { ci = i; carouselShow(i); };
+      dotsEl.appendChild(d);
+    });
+  }
+  setInterval(carouselNext, 4200);
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); } });
+  }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const body = item.querySelector('.faq-body');
+    const icon = btn.querySelector('.faq-icon');
+    const isOpen = !body.classList.contains('hidden');
+
+    // Close all others
+    document.querySelectorAll('.faq-item').forEach(el => {
+      el.querySelector('.faq-body').classList.add('hidden');
+      el.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+      el.querySelector('.faq-btn').style.color = '';
+    });
+
+    if (!isOpen) {
+      body.classList.remove('hidden');
+      icon.style.transform = 'rotate(45deg)';
+    }
+  }
+
+  setTimeout(() => lucide.createIcons(), 300);
+</script>
 </body>
 </html>
