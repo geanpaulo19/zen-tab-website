@@ -1,145 +1,244 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy - Zen New Tab</title>
+  <title>Privacy Policy — Zen New Tab</title>
   <link rel="icon" type="image/png" sizes="128x128" href="assets/128.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { ink: '#0a0c10', zenblue: '#4f8ef7', zencyan: '#5ee7df' },
+          fontFamily: {
+            sans: ['"DM Sans"', 'ui-sans-serif', 'system-ui'],
+            display: ['"DM Serif Display"', 'Georgia', 'serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 0 20px;
-      line-height: 1.6;
-      color: #333;
-      background-color: #fff;
-    }
-    header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 30px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 20px;
-    }
-    header img {
-      width: 50px;
-      height: 50px;
-      margin-right: 15px;
-    }
-    h1 {
-      color: #2c3e50;
-      font-size: 1.8rem;
-      margin: 0;
-    }
-    h2 {
-      color: #2c3e50;
-      margin-top: 30px;
-      font-size: 1.4rem;
-      border-left: 4px solid #1e88e5;
-      padding-left: 10px;
-    }
-    .highlight-box {
-      background-color: #f1f8ff;
-      padding: 15px;
-      border-radius: 8px;
-      border: 1px solid #d1e9ff;
-      margin: 20px 0;
-    }
-    a {
-      color: #1e88e5;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    ul {
-      margin-left: 20px;
-    }
-    footer {
-      margin-top: 60px;
-      padding-top: 20px;
-      border-top: 1px solid #eee;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #888;
-    }
+    :root { --ink: #0a0c10; --glass-border: rgba(255,255,255,0.09); }
+    html, body { background: var(--ink); color: #e2e4ec; }
+
+    .blob { position: fixed; border-radius: 50%; filter: blur(90px); pointer-events: none; will-change: transform; }
+    .blob-a { width: 600px; height: 600px; background: radial-gradient(circle, rgba(79,142,247,0.14) 0%, transparent 70%); top: -100px; left: -100px; animation: driftA 30s ease-in-out infinite; }
+    .blob-b { width: 480px; height: 480px; background: radial-gradient(circle, rgba(94,231,223,0.09) 0%, transparent 70%); top: 40%; right: -80px; animation: driftB 36s ease-in-out infinite; }
+    .blob-c { width: 380px; height: 380px; background: radial-gradient(circle, rgba(170,110,255,0.08) 0%, transparent 70%); bottom: 10%; left: 20%; animation: driftC 24s ease-in-out infinite; }
+
+    @keyframes driftA { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(60px,40px) scale(1.05); } 66% { transform: translate(-30px,80px) scale(0.95); } }
+    @keyframes driftB { 0%,100% { transform: translate(0,0) scale(1); } 40% { transform: translate(-80px,-50px) scale(1.07); } 75% { transform: translate(40px,30px) scale(0.96); } }
+    @keyframes driftC { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(50px,-60px) scale(1.08); } }
+
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: 0.022; pointer-events: none; z-index: 9999; }
+
+    .glass-card { background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); backdrop-filter: blur(20px) saturate(140%); -webkit-backdrop-filter: blur(20px) saturate(140%); transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s; }
+    .glass-card:hover { border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.065); transform: translateY(-2px); box-shadow: 0 20px 55px rgba(0,0,0,0.35); }
+
+    #site-nav { top: 16px; left: 0; right: 0; padding: 0; background: transparent; pointer-events: none; }
+    #site-nav .nav-pill { max-width: calc(72rem - 3rem); margin: 0 auto; width: calc(100% - 3rem); background: rgba(14,16,22,0.78); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,255,255,0.10); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,0,0,0.35); pointer-events: auto; }
+
+    .btn-primary { background: linear-gradient(135deg, #4f8ef7 0%, #5ee7df 100%); color: #0a0c10; font-weight: 600; border-radius: 14px; transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px) scale(1.01); box-shadow: 0 8px 30px rgba(79,142,247,0.35); }
+
+    .zen-rule { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.16s; }
+
+    .policy-section h2 { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.28); margin-bottom: 12px; }
+    .policy-section p { font-size: 0.9rem; color: rgba(255,255,255,0.48); line-height: 1.8; }
+    .policy-section p + p { margin-top: 10px; }
+    .policy-section strong { color: rgba(255,255,255,0.78); font-weight: 500; }
+    .policy-section a { color: #7eb8ff; text-decoration: none; transition: color 0.2s; }
+    .policy-section a:hover { color: #a8d0ff; text-decoration: underline; text-underline-offset: 3px; }
+    .policy-section code { font-size: 0.8rem; background: rgba(255,255,255,0.07); padding: 1px 6px; border-radius: 4px; color: #7eb8ff; font-family: monospace; }
+    .policy-section ul { list-style: none; padding: 0; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .policy-section ul li { position: relative; padding-left: 18px; font-size: 0.9rem; color: rgba(255,255,255,0.48); line-height: 1.75; }
+    .policy-section ul li::before { content: '→'; position: absolute; left: 0; color: rgba(79,142,247,0.5); font-size: 0.72rem; top: 4px; }
+
+    .highlight-glass { background: rgba(79,142,247,0.06); border: 1px solid rgba(79,142,247,0.18); border-radius: 16px; padding: 18px 22px; }
+    .highlight-glass p { color: rgba(255,255,255,0.52); font-size: 0.9rem; line-height: 1.75; margin: 0; }
+    .highlight-glass strong { color: rgba(255,255,255,0.82); }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--ink); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
   </style>
 </head>
-<body>
-  <header>
-    <img src="assets/128.png" alt="Zen New Tab Logo">
-    <h1>Zen New Tab - Privacy Policy</h1>
-  </header>
 
-  <p><strong>Effective Date:</strong> March 21, 2026 &nbsp;·&nbsp; <em>Updated from January 16, 2026</em></p>
+<body class="antialiased overflow-x-hidden font-sans">
 
-  <section class="highlight-box">
-    <strong>Commitment to Privacy:</strong> Zen New Tab is designed to be a private-by-default, minimalist dashboard. We do not track you, we do not sell your data, and we do not collect any personally identifiable information (PII).
-  </section>
+<!-- Aurora -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none" style="z-index:0;">
+  <div class="blob blob-a"></div>
+  <div class="blob blob-b"></div>
+  <div class="blob blob-c"></div>
+</div>
 
-  <h2>1. Single Purpose & Description</h2>
-  <p>Zen New Tab provides a unified minimalist dashboard that streamlines your start-page experience. It brings together time, date, daily inspiration, weather, integrated search, quick links, sticky notes, and a suite of productivity mini-apps (Pomodoro Timer, World Clock, To-do List, Countdown Timer, Calendar, and Focus Sounds) into one cohesive, clutter-free interface.</p>
+<!-- NAV -->
+<nav id="site-nav" class="fixed z-50">
+  <div class="nav-pill">
+    <div class="flex items-center justify-between gap-4 px-6 py-2.5 w-full">
+      <a href="/" class="flex items-center gap-2.5 flex-shrink-0" style="text-decoration:none;">
+        <img src="assets/128.png" alt="Zen New Tab" class="w-6 h-6 rounded-lg" onerror="this.style.display='none'" />
+        <span class="font-semibold text-sm text-white/85">Zen New Tab</span>
+      </a>
+      <div></div>
+      <a href="https://chromewebstore.google.com/detail/chhlgdhacpabpphphdhjicnpbpklpdbk?utm_source=item-share-cb"
+         target="_blank" rel="noopener noreferrer"
+         class="btn-primary text-xs py-1.5 px-4 inline-flex items-center gap-1.5 flex-shrink-0">
+        <i data-lucide="chrome" class="w-3.5 h-3.5"></i>
+        <span class="hidden sm:inline">Add to Chrome</span>
+        <span class="sm:hidden">Install</span>
+      </a>
+    </div>
+  </div>
+</nav>
 
-  <h2>2. Data Collection and Limited Use</h2>
-  <p>This extension does <strong>not</strong> collect personal data. All features operate locally within your browser. <strong>Zen New Tab adheres to the Google Web Store Limited Use Policy:</strong></p>
-  <ul>
-    <li>We do not use or transfer data for serving ads, including retargeting or personalized advertising.</li>
-    <li>We do not allow humans to read user data unless we have first obtained your affirmative agreement for specific purposes (e.g., tech support).</li>
-  </ul>
+<!-- PAGE HEADER -->
+<section class="relative max-w-6xl mx-auto px-6 pt-36 pb-14" style="z-index:1;">
+  <div class="reveal">
+    <p class="text-xs tracking-widest uppercase text-white/25 mb-4">Legal</p>
+    <h1 class="font-display text-4xl md:text-5xl font-normal text-white leading-tight mb-4">Privacy Policy</h1>
+    <p class="text-white/35 text-sm font-light">Effective March 21, 2026 &nbsp;·&nbsp; Updated from January 16, 2026</p>
+  </div>
+</section>
 
-  <h2>3. API Usage & Search Functionality</h2>
-  <p>The extension fetches dynamic content to power the dashboard via secure (HTTPS) requests:</p>
-  <ul>
-    <li><strong>Backgrounds:</strong> Retrieves high-quality imagery via proxy from Unsplash and Lorem Picsum.</li>
-    <li><strong>Inspiration:</strong> Fetches daily quotes from ZenQuotes, TypeFit, Forismatic, DummyJSON, FreeAPI, and Quotes-DB. Quotes are cached locally for the day.</li>
-    <li><strong>Weather:</strong> Uses the Open-Meteo API to provide real-time weather updates based on your approximate location. Results are cached locally for 15 minutes.</li>
-    <li><strong>Reverse Geocoding:</strong> Uses the Nominatim (OpenStreetMap) API to resolve your latitude/longitude into a human-readable city name for the weather widget. No personal data is stored by this service.</li>
-    <li><strong>World Clock City Lookup:</strong> When you add a city to the World Clock, your typed city name is sent to Nominatim for geocoding and to Open-Meteo to determine its IANA timezone. This happens only on your explicit action and no data is retained.</li>
-    <li><strong>Search Suggestions:</strong> When you type in the integrated search bar, your query is sent to our Search API <em>solely</em> to provide real-time suggestions. This data is processed in transit, is never stored, and is not linked to your identity.</li>
-  </ul>
+<div class="zen-rule max-w-6xl mx-auto" style="z-index:1;position:relative;"></div>
 
-  <h2>4. Geolocation Data</h2>
-  <p>Geolocation is used <strong>exclusively</strong> to provide local weather information. The location data is processed locally to determine your city and is never shared, stored, or used for any other purpose.</p>
+<!-- CONTENT -->
+<section class="relative max-w-6xl mx-auto px-6 py-16" style="z-index:1;">
+  <div class="flex flex-col gap-5">
 
-  <h2>5. Local Storage</h2>
-  <p>We use the browser's <code>localStorage</code> to store your preferences and content entirely on your own device. Nothing is ever uploaded to a server. Data stored includes:</p>
-  <ul>
-    <li><strong>UI preferences:</strong> 12/24-hour clock format, widget visibility toggles, particle effects on/off.</li>
-    <li><strong>Background cache:</strong> Today's chosen background URL and attribution, refreshed daily.</li>
-    <li><strong>Custom wallpaper:</strong> If you upload a personal image, it is stored as a base64 data URL in your browser's local storage and never leaves your device.</li>
-    <li><strong>Quote cache:</strong> The day's inspiration quote, refreshed daily.</li>
-    <li><strong>Weather cache:</strong> Your last known weather result (temperature, condition, city), refreshed every 15 minutes or when you move more than 1 km.</li>
-    <li><strong>Quick links:</strong> URLs and labels you manually add to the quick links bar.</li>
-    <li><strong>Sticky notes:</strong> The text content, position, size, and color of each note you create.</li>
-    <li><strong>To-do list:</strong> Task text and completion state for your checklist items.</li>
-    <li><strong>World clock cities:</strong> City names and IANA timezone strings you add to the World Clock widget.</li>
-    <li><strong>Timer state:</strong> Paused/running state, remaining time, and mode for the Pomodoro Timer and Countdown Timer, so they survive tab refreshes.</li>
-    <li><strong>Widget positions:</strong> The screen coordinates of each draggable widget so they reopen where you left them.</li>
-    <li><strong>Focus sounds:</strong> Your last selected ambient sound and volume level.</li>
-  </ul>
-  <p>All of this data lives exclusively in your browser. You can clear it at any time via your browser's "Clear site data" option.</p>
+    <!-- Commitment -->
+    <div class="highlight-glass reveal">
+      <p><strong>Commitment to Privacy:</strong> Zen New Tab is designed to be a private-by-default, minimalist dashboard. We do not track you, we do not sell your data, and we do not collect any personally identifiable information (PII).</p>
+    </div>
 
-  <h2>6. No Remote Code Execution</h2>
-  <p>In compliance with Chrome Web Store safety standards, Zen New Tab <strong>does not</strong> execute remote code. All APIs return structured JSON data only. No scripts, <code>eval()</code>, or executable content is ever fetched from external sources.</p>
+    <!-- 1 -->
+    <div class="glass-card rounded-2xl p-6 policy-section reveal">
+      <h2>1. Single Purpose &amp; Description</h2>
+      <p>Zen New Tab provides a unified minimalist dashboard that streamlines your start-page experience. It brings together time, date, daily inspiration, weather, integrated search, quick links, sticky notes, and a suite of productivity mini-apps (Pomodoro Timer, World Clock, To-do List, Countdown Timer, Calendar, and Focus Sounds) into one cohesive, clutter-free interface.</p>
+    </div>
 
-  <h2>7. Third-Party Services</h2>
-  <p>Zen New Tab interacts with the following third-party services, each accessed only for the specific purpose described:</p>
-  <ul>
-    <li><strong>Unsplash / Lorem Picsum</strong> — background imagery. If you click a photographer credit, you may be directed to their respective sites. See <a href="https://unsplash.com/privacy" target="_blank">Unsplash's privacy policy</a>.</li>
-    <li><strong>Open-Meteo</strong> — weather data and timezone lookups. Open-Meteo is a free, open-source API that does not require an account or track users. See <a href="https://open-meteo.com/en/terms" target="_blank">Open-Meteo terms</a>.</li>
-    <li><strong>Nominatim / OpenStreetMap</strong> — reverse geocoding (weather city name) and forward geocoding (World Clock city lookup). Nominatim is operated by the OpenStreetMap Foundation. See <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank">OSM Foundation Privacy Policy</a>.</li>
-    <li><strong>Quote APIs</strong> (ZenQuotes, TypeFit, Forismatic, DummyJSON, FreeAPI, Quotes-DB) — daily inspirational quotes. Only a random quote is fetched; no user data is sent.</li>
-  </ul>
+    <!-- 2 -->
+    <div class="glass-card rounded-2xl p-6 policy-section reveal d1">
+      <h2>2. Data Collection and Limited Use</h2>
+      <p>This extension does <strong>not</strong> collect personal data. All features operate locally within your browser. <strong>Zen New Tab adheres to the Google Web Store Limited Use Policy:</strong></p>
+      <ul>
+        <li>We do not use or transfer data for serving ads, including retargeting or personalized advertising.</li>
+        <li>We do not allow humans to read user data unless we have first obtained your affirmative agreement for specific purposes (e.g., tech support).</li>
+      </ul>
+    </div>
 
-  <h2>8. Audio — Focus Sounds</h2>
-  <p>The Focus Sounds feature generates ambient noise (rain, wind, ocean, fire, white noise, brown noise) entirely within your browser using the Web Audio API. No audio data is recorded, transmitted, or stored. The only things saved to local storage are your chosen sound preference and volume level.</p>
+    <!-- 3 -->
+    <div class="glass-card rounded-2xl p-6 policy-section reveal d2">
+      <h2>3. API Usage &amp; Search Functionality</h2>
+      <p>The extension fetches dynamic content to power the dashboard via secure (HTTPS) requests:</p>
+      <ul>
+        <li><strong>Backgrounds:</strong> Retrieves high-quality imagery via proxy from Unsplash and Lorem Picsum.</li>
+        <li><strong>Inspiration:</strong> Fetches daily quotes from ZenQuotes, TypeFit, Forismatic, DummyJSON, FreeAPI, and Quotes-DB. Quotes are cached locally for the day.</li>
+        <li><strong>Weather:</strong> Uses the Open-Meteo API to provide real-time weather updates based on your approximate location. Results are cached locally for 15 minutes.</li>
+        <li><strong>Reverse Geocoding:</strong> Uses the Nominatim (OpenStreetMap) API to resolve your latitude/longitude into a human-readable city name for the weather widget. No personal data is stored by this service.</li>
+        <li><strong>World Clock City Lookup:</strong> When you add a city to the World Clock, your typed city name is sent to Nominatim for geocoding and to Open-Meteo to determine its IANA timezone. This happens only on your explicit action and no data is retained.</li>
+        <li><strong>Search Suggestions:</strong> When you type in the search bar, your query is sent to our Search API solely to provide real-time suggestions. This data is processed in transit, is never stored, and is not linked to your identity.</li>
+      </ul>
+    </div>
 
-  <h2>9. Contact</h2>
-  <p>If you have any questions regarding this policy or the Zen New Tab experience, please reach out to the developer at: <a href="mailto:hello@geanpaulo.com">hello@geanpaulo.com</a>.</p>
+    <!-- 4 -->
+    <div class="glass-card rounded-2xl p-6 policy-section reveal">
+      <h2>4. Geolocation Data</h2>
+      <p>Geolocation is used <strong>exclusively</strong> to provide local weather information. The location data is processed locally to determine your city and is never shared, stored, or used for any other purpose.</p>
+    </div>
 
-  <footer>
-    &copy; 2026 <a href="https://zen.geanpaulo.com" target="_blank">Zen New Tab</a>. Built with a focus on simplicity and privacy.
-  </footer>
+    <!-- 5 -->
+    <div class="glass-card rounded-2xl p-6 policy-section reveal d1">
+      <h2>5. Local Storage</h2>
+      <p>We use the browser's <code>localStorage</code> to store your preferences and content entirely on your own device. Nothing is ever uploaded to a server. Data stored includes:</p>
+      <ul>
+        <li><strong>UI preferences:</strong> 12/24-hour clock format, widget visibility toggles, particle effects on/off.</li>
+        <li><strong>Background cache:</strong> Today's chosen background URL and attribution, refreshed daily.</li>
+        <li><strong>Custom wallpaper:</strong> If you upload a personal image, it is stored as a base64 data URL in your browser's local storage and never leaves your device.</li>
+        <li><strong>Quote cache:</strong> The day's inspiration quote, refreshed daily.</li>
+        <li><strong>Weather cache:</strong> Your last known weather result (temperature, condition, city), refreshed every 15 minutes or when you move more than 1 km.</li>
+        <li><strong>Quick links:</strong> URLs and labels you manually add to the quick links bar.</li>
+        <li><strong>Sticky notes:</strong> The text content, position, size, and color of each note you create.</li>
+        <li><strong>To-do list:</strong> Task text and completion state for your checklist items.</li>
+        <li><strong>World clock cities:</strong> City names and IANA timezone strings you add to the World Clock widget.</li>
+        <li><strong>Timer state:</strong> Paused/running state, remaining time, and mode for the Pomodoro Timer and Countdown Timer, so they survive tab refreshes.</li>
+        <li><strong>Widget positions:</strong> The screen coordinates of each draggable widget so they reopen where you left them.</li>
+        <li><strong>Focus sounds:</strong> Your last selected ambient sound and volume level.</li>
+      </ul>
+      <p class="mt-3">All of this data lives exclusively in your browser. You can clear it at any time via your browser's "Clear site data" option.</p>
+    </div>
+
+    <!-- 6 -->
+    <div class="glass-card rounded-2xl p-6 policy-section reveal d2">
+      <h2>6. No Remote Code Execution</h2>
+      <p>In compliance with Chrome Web Store safety standards, Zen New Tab <strong>does not</strong> execute remote code. All APIs return structured JSON data only. No scripts, <code>eval()</code>, or executable content is ever fetched from external sources.</p>
+    </div>
+
+    <!-- 7 -->
+    <div class="glass-card rounded-2xl p-6 policy-section reveal">
+      <h2>7. Third-Party Services</h2>
+      <p>Zen New Tab interacts with the following third-party services, each accessed only for the specific purpose described:</p>
+      <ul>
+        <li><strong>Unsplash / Lorem Picsum</strong> — background imagery. If you click a photographer credit, you may be directed to their respective sites. See <a href="https://unsplash.com/privacy" target="_blank" rel="noopener noreferrer">Unsplash's privacy policy</a>.</li>
+        <li><strong>Open-Meteo</strong> — weather data and timezone lookups. Open-Meteo is a free, open-source API that does not require an account or track users. See <a href="https://open-meteo.com/en/terms" target="_blank" rel="noopener noreferrer">Open-Meteo terms</a>.</li>
+        <li><strong>Nominatim / OpenStreetMap</strong> — reverse geocoding (weather city name) and forward geocoding (World Clock city lookup). Nominatim is operated by the OpenStreetMap Foundation. See <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener noreferrer">OSM Foundation Privacy Policy</a>.</li>
+        <li><strong>Quote APIs</strong> (ZenQuotes, TypeFit, Forismatic, DummyJSON, FreeAPI, Quotes-DB) — daily inspirational quotes. Only a random quote is fetched; no user data is sent.</li>
+      </ul>
+    </div>
+
+    <!-- 8 -->
+    <div class="glass-card rounded-2xl p-6 policy-section reveal d1">
+      <h2>8. Audio — Focus Sounds</h2>
+      <p>The Focus Sounds feature generates ambient noise (rain, wind, ocean, fire, white noise, brown noise) entirely within your browser using the Web Audio API. No audio data is recorded, transmitted, or stored. The only things saved to local storage are your chosen sound preference and volume level.</p>
+    </div>
+
+    <!-- 9 -->
+    <div class="glass-card rounded-2xl p-6 policy-section reveal d2">
+      <h2>9. Contact</h2>
+      <p>If you have any questions regarding this policy or the Zen New Tab experience, please reach out to the developer at: <a href="mailto:hello@geanpaulo.com">hello@geanpaulo.com</a>.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative" style="z-index:1;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="py-10 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-white/22 border-t" style="border-color:rgba(255,255,255,0.055);">
+      <span>© 2026 <a href="https://zen.geanpaulo.com" target="_blank" rel="noopener noreferrer" class="hover:text-white/55 transition-colors">Zen New Tab</a>. Built with a focus on simplicity and privacy.</span>
+      <div class="flex items-center gap-5">
+        <a href="/devinfo.html" class="hover:text-white/55 transition-colors">Changelog</a>
+        <a href="mailto:hello@geanpaulo.com" class="hover:text-white/55 transition-colors">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  setTimeout(() => lucide.createIcons(), 200);
+</script>
 </body>
 </html>
