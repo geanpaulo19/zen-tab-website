@@ -187,6 +187,30 @@
   <h2>Changelog</h2>
 
   <div class="changelog-item">
+    <span class="version-tag">v2.0.0</span>
+    <span class="date">March 21, 2026</span>
+    <ul>
+      <li>Complete rewrite — unified all widgets under a single <strong>Settings Modal</strong> (⚙️) with toggle switches, replacing scattered floating buttons.</li>
+      <li>Added 🍅 <strong>Pomodoro Timer</strong> — draggable widget with Focus, Short Break, and Long Break modes, animated SVG ring, and wall-clock accuracy across tab switches.</li>
+      <li>Added 🌍 <strong>World Clock</strong> — up to 8 cities with live local times; add any city by name with automatic IANA timezone lookup via Nominatim + Open-Meteo.</li>
+      <li>Added ✅ <strong>To-do List</strong> — draggable checklist widget with persistent storage, done/undone toggle, and one-click clear of completed items.</li>
+      <li>Added ⏱ <strong>Countdown Timer</strong> — draggable widget with 5 quick-presets (5m–1h), custom m:s input, animated SVG ring, tab-title countdown, and audio alarm on finish.</li>
+      <li>Added 📅 <strong>Calendar</strong> — draggable monthly calendar with today highlighted, weekend dimming, and prev/next month navigation.</li>
+      <li>Added 🎵 <strong>Focus Sounds</strong> — offline ambient noise generator (Rain, Wind, Ocean, Fire, White Noise, Brown Noise) with volume control and pulse animation on active sound.</li>
+      <li>Added 🖼️ <strong>Custom Wallpaper</strong> — upload your own image stored locally in the browser; toggleable independently from the daily photo feed.</li>
+      <li>Added ✨ <strong>Particle system</strong> — subtle floating particles overlaid on the background, toggleable in Settings.</li>
+      <li>Added <strong>Quick Links manager</strong> in Settings — add, edit, and remove links inline without leaving the modal; max 8 links enforced.</li>
+      <li>Introduced a <strong>shared drag system</strong> for all floating widgets — one global mousemove/mouseup handler replaces N per-widget document listeners, eliminating event listener leaks.</li>
+      <li>Weather now uses a <strong>15-minute TTL cache</strong> with location-change detection (1 km threshold) — no more redundant fetches on every new tab open.</li>
+      <li>Background fetcher now <strong>shuffles API sources</strong> (Unsplash Worker vs. Lorem Picsum) on each load for greater image variety.</li>
+      <li>All timers (Pomodoro, Countdown) use <strong>wall-clock anchoring</strong> — remaining time is computed from <code>Date.now()</code> rather than tick counts, so they stay accurate when the tab is backgrounded.</li>
+      <li>System 24-hour detection result is <strong>cached once at startup</strong> instead of being re-evaluated on every clock tick.</li>
+      <li>Entrance animations now skip hidden elements — no wasted transitions on elements with <code>display:none</code>.</li>
+      <li>Ghost-text layout values in the search bar are cached after first measurement, eliminating repeated <code>getComputedStyle</code> calls.</li>
+    </ul>
+  </div>
+
+  <div class="changelog-item">
     <span class="version-tag">v1.3.0</span>
     <span class="date">March 01, 2026</span>
     <ul>
@@ -263,7 +287,7 @@
 
   <footer>
     <p><a href="https://geanpaulo19.github.io/zen-new-tab-privacy/privacy.html">Privacy Policy</a></p>
-    &copy; 2026 Zen New Tab. Built for focus.
+    &copy; 2026 Zen New Tab · v2.0.0 · Built for focus.
   </footer>
 </body>
 </html>
