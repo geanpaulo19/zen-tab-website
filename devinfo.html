@@ -124,6 +124,57 @@
 <section class="relative max-w-6xl mx-auto px-6 py-16" style="z-index:1;">
   <div class="flex flex-col">
 
+    <!-- v2.2 -->
+    <div class="reveal flex gap-5">
+      <div class="flex flex-col items-center flex-shrink-0 pt-1">
+        <div class="version-dot latest"></div>
+        <div class="flex-1 w-px mt-2" style="background:linear-gradient(to bottom,rgba(79,142,247,0.22),transparent);min-height:32px;"></div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
+        <div class="flex items-center gap-3 mb-5 flex-wrap">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.2</span>
+          <span class="text-xs text-white/28">June 11, 2026</span>
+          <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(94,231,223,0.08);border:1px solid rgba(94,231,223,0.18);color:rgba(94,231,223,0.75);">Latest</span>
+        </div>
+        <ul class="cl-list space-y-1.5">
+          <li><strong>Mini Apps card grid</strong> — Settings now shows each mini app as a tappable card with icon, description, and inline toggle. Easier to scan than the old list.</li>
+          <li>Added 🧮 <strong>Calculator</strong> — full arithmetic with percentage, sign toggle, and keyboard support.</li>
+          <li>Added 📊 <strong>Day Progress</strong> — animated progress bars for day, week, and year elapsed.</li>
+          <li>Added 🧩 <strong>2048</strong> — classic sliding number puzzle.</li>
+          <li>Added 🃏 <strong>Memory Match</strong> — flip cards to find matching pairs.</li>
+          <li>Added 🐍 <strong>Snake</strong> — classic snake game with keyboard controls.</li>
+          <li>Added 🧱 <strong>Tetris</strong> — stack and clear lines with falling blocks.</li>
+          <li>Added 📆 <strong>Event Countdown</strong> — count down to your own custom dates and events.</li>
+          <li>Added 🎉 <strong>Public Holidays</strong> — upcoming holidays for your selected country.</li>
+          <li>Added 🫁 <strong>Breathing Exercise</strong> — guided deep breathing with animated circle indicator.</li>
+          <li>All mini apps now freely <strong>draggable</strong> and repositionable anywhere on screen.</li>
+          <li>Performance: consolidated all widget event listeners into a single shared drag handler.</li>
+          <li>Bug fixes and polish across all mini apps and the settings modal.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- v2.1 -->
+    <div class="reveal d1 flex gap-5">
+      <div class="flex flex-col items-center flex-shrink-0 pt-1">
+        <div class="version-dot old"></div>
+        <div class="flex-1 w-px mt-2" style="background:linear-gradient(to bottom,rgba(255,255,255,0.07),transparent);min-height:32px;"></div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
+        <div class="flex items-center gap-3 mb-5 flex-wrap">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);color:rgba(255,255,255,0.45);">v2.1</span>
+          <span class="text-xs text-white/28">March 28, 2026</span>
+        </div>
+        <ul class="cl-list space-y-1.5">
+          <li>Introduced <strong>quick links favicon support</strong> — auto-fetch site icons for each bookmark.</li>
+          <li>Added 12/24-hour <strong>time format toggle</strong> with system-auto detection.</li>
+          <li>Weather refresh now <strong>detects 1 km location changes</strong> for smarter API calls.</li>
+          <li>Background sources <strong>shuffle between APIs</strong> (Unsplash, Picsum) for greater variety.</li>
+          <li>Stability and caching improvements across weather, quote, and background fetchers.</li>
+        </ul>
+      </div>
+    </div>
+
     <!-- v2.0.0 -->
     <div class="reveal flex gap-5">
       <div class="flex flex-col items-center flex-shrink-0 pt-1">
@@ -132,9 +183,8 @@
       </div>
       <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
         <div class="flex items-center gap-3 mb-5 flex-wrap">
-          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.0.0</span>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);color:rgba(255,255,255,0.45);">v2.0.0</span>
           <span class="text-xs text-white/28">March 21, 2026</span>
-          <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(94,231,223,0.08);border:1px solid rgba(94,231,223,0.18);color:rgba(94,231,223,0.75);">Latest</span>
         </div>
         <ul class="cl-list space-y-1.5">
           <li>Complete rewrite — unified all widgets under a single <strong>Settings Modal</strong> (⚙️) with toggle switches, replacing scattered floating buttons.</li>
@@ -295,7 +345,7 @@
 <footer class="relative" style="z-index:1;">
   <div class="max-w-6xl mx-auto px-6">
     <div class="py-10 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-white/22 border-t" style="border-color:rgba(255,255,255,0.055);">
-      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.0.0 &nbsp;·&nbsp; Built for focus.</span>
+      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.2 &nbsp;·&nbsp; Built for focus.</span>
       <div class="flex items-center gap-5">
         <a href="/privacy.html" class="hover:text-white/55 transition-colors">Privacy Policy</a>
         <a href="mailto:hello@geanpaulo.com" class="hover:text-white/55 transition-colors">Contact</a>
