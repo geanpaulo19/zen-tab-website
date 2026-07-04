@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Changelog — Zen New Tab</title>
-  <link rel="icon" type="image/png" sizes="128x128" href="assets/128.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="icons/128.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -94,7 +94,7 @@
   <div class="nav-pill">
     <div class="flex items-center justify-between gap-4 px-6 py-2.5 w-full">
       <a href="/" class="flex items-center gap-2.5 flex-shrink-0 no-underline">
-        <img src="assets/128.png" alt="Zen New Tab" class="w-6 h-6 rounded-lg" onerror="this.style.display='none'" />
+        <img src="icons/128.png" alt="Zen New Tab" class="w-6 h-6 rounded-lg" onerror="this.style.display='none'" />
         <span class="font-semibold text-sm text-white/85">Zen New Tab</span>
       </a>
       <div></div>
@@ -124,7 +124,7 @@
 <section class="relative max-w-6xl mx-auto px-6 py-16" style="z-index:1;">
   <div class="flex flex-col">
 
-    <!-- v2.2 -->
+    <!-- v2.5 -->
     <div class="reveal flex gap-5">
       <div class="flex flex-col items-center flex-shrink-0 pt-1">
         <div class="version-dot latest"></div>
@@ -132,9 +132,43 @@
       </div>
       <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
         <div class="flex items-center gap-3 mb-5 flex-wrap">
-          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.2</span>
-          <span class="text-xs text-white/28">June 11, 2026</span>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.5</span>
+          <span class="text-xs text-white/28">July 04, 2026</span>
           <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(94,231,223,0.08);border:1px solid rgba(94,231,223,0.18);color:rgba(94,231,223,0.75);">Latest</span>
+        </div>
+        <ul class="cl-list space-y-1.5">
+          <li><strong>Appearance customization</strong> — added curated theme presets, wallpaper overlay strength, glass intensity, clock style, search bar style, quick-link tile style, and text shadow controls.</li>
+          <li>Added four new <strong>Theme Presets</strong>: Ocean Mist, Plum Dusk, Rose Quartz, and Slate Mint.</li>
+          <li>Expanded Appearance controls with widget corners, search width, clock size, quick-link size, UI scale, background blur, widget shadow, and font style presets.</li>
+          <li>Added an <strong>Appearance Reset</strong> action to restore theme, accent, quick-link shape, and visual controls back to defaults.</li>
+          <li><strong>Quick Link Icon Shape</strong> now includes Rounded, Soft, Square, Circle, Arch, and Pebble options with smoother live preview transitions.</li>
+          <li>Theme presets and accent colors now work independently, so changing a theme does not overwrite the user's selected accent color.</li>
+          <li>Search bar placeholder layout was refined with split text/icon alignment and a cleaner centered magnifier mark.</li>
+          <li><strong>Public Holidays</strong> — removed unsupported countries from the picker and improved Auto-detect so it uses timezone before browser language.</li>
+          <li>Public Holidays cache writes are now safer, so storage quota issues no longer make the widget look broken.</li>
+          <li><strong>Countdown Timer</strong> now clamps invalid, blank, or overflowing minute/second inputs instead of rendering <code>NaN:NaN</code>.</li>
+          <li><strong>Event Countdown</strong> now defaults to the user's local date instead of a UTC date, preventing off-by-one-day behavior in some timezones.</li>
+          <li><strong>Pomodoro</strong> restored sessions are sanitized, and pressing play from <code>00:00</code> starts a fresh session.</li>
+          <li><strong>2048, Memory, Snake, and Tetris</strong> now reject malformed saved game state instead of restoring corrupted boards.</li>
+          <li><strong>Snake</strong> now handles a completely filled board without getting stuck trying to spawn food forever.</li>
+          <li><strong>Tetris</strong> paused state now behaves as labeled: random keys no longer resume the game.</li>
+          <li><strong>World Clock, To-do, Event Countdown, and Focus Sounds</strong> now normalize saved local data before rendering.</li>
+          <li>Quick Links now reject unsafe URL schemes and normalize missing protocols more reliably.</li>
+          <li>Search suggestions, quote rendering, weather caching, and hidden widget timers received additional reliability fixes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- v2.2 -->
+    <div class="reveal d1 flex gap-5">
+      <div class="flex flex-col items-center flex-shrink-0 pt-1">
+        <div class="version-dot old"></div>
+        <div class="flex-1 w-px mt-2" style="background:linear-gradient(to bottom,rgba(255,255,255,0.07),transparent);min-height:32px;"></div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
+        <div class="flex items-center gap-3 mb-5 flex-wrap">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);color:rgba(255,255,255,0.45);">v2.2</span>
+          <span class="text-xs text-white/28">June 11, 2026</span>
         </div>
         <ul class="cl-list space-y-1.5">
           <li><strong>Mini Apps card grid</strong> — Settings now shows each mini app as a tappable card with icon, description, and inline toggle. Easier to scan than the old list.</li>
@@ -345,7 +379,7 @@
 <footer class="relative" style="z-index:1;">
   <div class="max-w-6xl mx-auto px-6">
     <div class="py-10 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-white/22 border-t" style="border-color:rgba(255,255,255,0.055);">
-      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.2 &nbsp;·&nbsp; Built for focus.</span>
+      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.5 &nbsp;·&nbsp; Built for focus.</span>
       <div class="flex items-center gap-5">
         <a href="/privacy.html" class="hover:text-white/55 transition-colors">Privacy Policy</a>
         <a href="mailto:hello@geanpaulo.com" class="hover:text-white/55 transition-colors">Contact</a>
