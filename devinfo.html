@@ -27,64 +27,13 @@
 
   <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 
-  <style>
-    :root { --ink: #0a0c10; --glass-border: rgba(255,255,255,0.09); }
-    html, body { background: var(--ink); color: #e2e4ec; }
+  <link rel="stylesheet" href="styles.css" />
 
-    .blob { position: fixed; border-radius: 50%; filter: blur(90px); pointer-events: none; will-change: transform; }
-    .blob-a { width: 600px; height: 600px; background: radial-gradient(circle, rgba(79,142,247,0.14) 0%, transparent 70%); top: -100px; left: -100px; animation: driftA 30s ease-in-out infinite; }
-    .blob-b { width: 480px; height: 480px; background: radial-gradient(circle, rgba(94,231,223,0.09) 0%, transparent 70%); top: 40%; right: -80px; animation: driftB 36s ease-in-out infinite; }
-    .blob-c { width: 380px; height: 380px; background: radial-gradient(circle, rgba(170,110,255,0.08) 0%, transparent 70%); bottom: 10%; left: 20%; animation: driftC 24s ease-in-out infinite; }
-
-    @keyframes driftA { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(60px,40px) scale(1.05); } 66% { transform: translate(-30px,80px) scale(0.95); } }
-    @keyframes driftB { 0%,100% { transform: translate(0,0) scale(1); } 40% { transform: translate(-80px,-50px) scale(1.07); } 75% { transform: translate(40px,30px) scale(0.96); } }
-    @keyframes driftC { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(50px,-60px) scale(1.08); } }
-
-    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: 0.022; pointer-events: none; z-index: 9999; }
-
-    .glass-card { background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); backdrop-filter: blur(20px) saturate(140%); -webkit-backdrop-filter: blur(20px) saturate(140%); transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s; }
-    .glass-card:hover { border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.065); transform: translateY(-2px); box-shadow: 0 20px 55px rgba(0,0,0,0.35); }
-
-    #site-nav { top: 16px; left: 0; right: 0; padding: 0; background: transparent; pointer-events: none; }
-    #site-nav .nav-pill { max-width: calc(72rem - 3rem); margin: 0 auto; width: calc(100% - 3rem); background: rgba(14,16,22,0.78); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,255,255,0.10); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,0,0,0.35); pointer-events: auto; }
-    .brand-mark { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; flex: 0 0 24px; overflow: hidden; border-radius: 8px; background: linear-gradient(135deg, rgba(79,142,247,0.22), rgba(94,231,223,0.16)); border: 1px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.82); font-size: 0.68rem; font-weight: 700; line-height: 1; }
-    .brand-mark img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-
-    .btn-primary { background: linear-gradient(135deg, #4f8ef7 0%, #5ee7df 100%); color: #0a0c10; font-weight: 600; border-radius: 14px; transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s; }
-    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px) scale(1.01); box-shadow: 0 8px 30px rgba(79,142,247,0.35); }
-    .btn-ghost { border: 1px solid rgba(255,255,255,0.13); color: rgba(255,255,255,0.6); border-radius: 14px; transition: border-color 0.2s, color 0.2s, background 0.2s; }
-    .btn-ghost:hover { border-color: rgba(255,255,255,0.3); color: #fff; background: rgba(255,255,255,0.05); }
-
-    .zen-rule { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent); }
-
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
-    .reveal.in { opacity: 1; transform: translateY(0); }
-    .d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.16s; } .d3 { transition-delay: 0.24s; }
-
-    .version-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
-    .version-dot.latest { background: #4f8ef7; border: 2px solid rgba(79,142,247,0.3); box-shadow: 0 0 10px rgba(79,142,247,0.5); }
-    .version-dot.old { background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.08); }
-
-    .cl-list li { position: relative; padding-left: 16px; color: rgba(255,255,255,0.52); font-size: 0.875rem; line-height: 1.75; }
-    .cl-list li::before { content: '→'; position: absolute; left: 0; color: rgba(79,142,247,0.55); font-size: 0.75rem; top: 4px; }
-    .cl-list li strong { color: rgba(255,255,255,0.82); font-weight: 500; }
-    .cl-list li code { font-size: 0.78rem; background: rgba(255,255,255,0.07); padding: 1px 5px; border-radius: 4px; color: #7eb8ff; font-family: monospace; }
-
-    .social-btn { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.09); color: rgba(255,255,255,0.45); font-size: 0.7rem; font-weight: 700; text-decoration: none; transition: background 0.2s, color 0.2s, border-color 0.2s; font-family: 'DM Sans', sans-serif; }
-    .social-btn:hover { background: rgba(79,142,247,0.18); border-color: rgba(79,142,247,0.3); color: #7eb8ff; }
-
-    .donate-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px; background: rgba(255,196,57,0.1); border: 1px solid rgba(255,196,57,0.22); border-radius: 12px; color: rgba(255,196,57,0.85); font-size: 0.82rem; font-weight: 600; text-decoration: none; transition: background 0.2s, border-color 0.2s, color 0.2s; font-family: 'DM Sans', sans-serif; }
-    .donate-btn:hover { background: rgba(255,196,57,0.18); border-color: rgba(255,196,57,0.38); color: #ffc439; }
-
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--ink); }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-  </style>
 </head>
 
 <body class="antialiased overflow-x-hidden font-sans">
 
-<!-- Aurora -->
+<a href="#main-content" class="skip-link">Skip to content</a>
 <div class="fixed inset-0 overflow-hidden pointer-events-none" style="z-index:0;">
   <div class="blob blob-a"></div>
   <div class="blob blob-b"></div>
@@ -99,9 +48,7 @@
         <img src="assets/128.png" alt="Zen New Tab" class="w-6 h-6 rounded-lg" onerror="this.style.display='none'" />
         <span class="font-semibold text-sm text-white/85">Zen New Tab</span>
       </a>
-      <div class="hidden sm:flex items-center gap-5">
-        <a href="help.html" class="text-xs text-white/45 hover:text-white/80 transition-colors">Help</a>
-      </div>
+      <div></div>
       <a href="https://chromewebstore.google.com/detail/chhlgdhacpabpphphdhjicnpbpklpdbk?utm_source=item-share-cb"
          target="_blank" rel="noopener noreferrer"
          class="btn-primary text-xs py-1.5 px-4 inline-flex items-center gap-1.5 flex-shrink-0">
@@ -114,7 +61,7 @@
 </nav>
 
 <!-- PAGE HEADER -->
-<section class="relative max-w-6xl mx-auto px-6 pt-36 pb-14" style="z-index:1;">
+<section id="main-content" class="relative max-w-6xl mx-auto px-6 pt-36 pb-14" style="z-index:1;">
   <div class="reveal">
     <p class="text-xs tracking-widest uppercase text-white/25 mb-4">What's new</p>
     <h1 class="font-display text-4xl md:text-5xl font-normal text-white leading-tight mb-4">Changelog</h1>
@@ -392,6 +339,10 @@
   </div>
 </footer>
 
+<button id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i data-lucide="arrow-up" class="w-4 h-4"></i>
+</button>
+
 <script>
   lucide.createIcons();
 
@@ -399,6 +350,13 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const nav = document.getElementById('site-nav');
+  const btt = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('nav-scrolled', window.scrollY > 40);
+    btt.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
 
   setTimeout(() => lucide.createIcons(), 200);
 </script>
