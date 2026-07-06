@@ -27,60 +27,13 @@
 
   <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 
-  <style>
-    :root { --ink: #0a0c10; --glass-border: rgba(255,255,255,0.09); }
-    html, body { background: var(--ink); color: #e2e4ec; }
+  <link rel="stylesheet" href="styles.css" />
 
-    .blob { position: fixed; border-radius: 50%; filter: blur(90px); pointer-events: none; will-change: transform; }
-    .blob-a { width: 600px; height: 600px; background: radial-gradient(circle, rgba(79,142,247,0.14) 0%, transparent 70%); top: -100px; left: -100px; animation: driftA 30s ease-in-out infinite; }
-    .blob-b { width: 480px; height: 480px; background: radial-gradient(circle, rgba(94,231,223,0.09) 0%, transparent 70%); top: 40%; right: -80px; animation: driftB 36s ease-in-out infinite; }
-    .blob-c { width: 380px; height: 380px; background: radial-gradient(circle, rgba(170,110,255,0.08) 0%, transparent 70%); bottom: 10%; left: 20%; animation: driftC 24s ease-in-out infinite; }
-
-    @keyframes driftA { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(60px,40px) scale(1.05); } 66% { transform: translate(-30px,80px) scale(0.95); } }
-    @keyframes driftB { 0%,100% { transform: translate(0,0) scale(1); } 40% { transform: translate(-80px,-50px) scale(1.07); } 75% { transform: translate(40px,30px) scale(0.96); } }
-    @keyframes driftC { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(50px,-60px) scale(1.08); } }
-
-    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: 0.022; pointer-events: none; z-index: 9999; }
-
-    .glass-card { background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); backdrop-filter: blur(20px) saturate(140%); -webkit-backdrop-filter: blur(20px) saturate(140%); transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s; }
-    .glass-card:hover { border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.065); transform: translateY(-2px); box-shadow: 0 20px 55px rgba(0,0,0,0.35); }
-
-    #site-nav { top: 16px; left: 0; right: 0; padding: 0; background: transparent; pointer-events: none; }
-    #site-nav .nav-pill { max-width: calc(72rem - 3rem); margin: 0 auto; width: calc(100% - 3rem); background: rgba(14,16,22,0.78); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,255,255,0.10); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,0,0,0.35); pointer-events: auto; }
-
-    .btn-primary { background: linear-gradient(135deg, #4f8ef7 0%, #5ee7df 100%); color: #0a0c10; font-weight: 600; border-radius: 14px; transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s; }
-    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px) scale(1.01); box-shadow: 0 8px 30px rgba(79,142,247,0.35); }
-
-    .zen-rule { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent); }
-
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
-    .reveal.in { opacity: 1; transform: translateY(0); }
-    .d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.16s; }
-
-    .policy-section h2 { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.28); margin-bottom: 12px; }
-    .policy-section p { font-size: 0.9rem; color: rgba(255,255,255,0.48); line-height: 1.8; }
-    .policy-section p + p { margin-top: 10px; }
-    .policy-section strong { color: rgba(255,255,255,0.78); font-weight: 500; }
-    .policy-section a { color: #7eb8ff; text-decoration: none; transition: color 0.2s; }
-    .policy-section a:hover { color: #a8d0ff; text-decoration: underline; text-underline-offset: 3px; }
-    .policy-section code { font-size: 0.8rem; background: rgba(255,255,255,0.07); padding: 1px 6px; border-radius: 4px; color: #7eb8ff; font-family: monospace; }
-    .policy-section ul { list-style: none; padding: 0; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
-    .policy-section ul li { position: relative; padding-left: 18px; font-size: 0.9rem; color: rgba(255,255,255,0.48); line-height: 1.75; }
-    .policy-section ul li::before { content: '→'; position: absolute; left: 0; color: rgba(79,142,247,0.5); font-size: 0.72rem; top: 4px; }
-
-    .highlight-glass { background: rgba(79,142,247,0.06); border: 1px solid rgba(79,142,247,0.18); border-radius: 16px; padding: 18px 22px; }
-    .highlight-glass p { color: rgba(255,255,255,0.52); font-size: 0.9rem; line-height: 1.75; margin: 0; }
-    .highlight-glass strong { color: rgba(255,255,255,0.82); }
-
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--ink); }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-  </style>
 </head>
 
 <body class="antialiased overflow-x-hidden font-sans">
 
-<!-- Aurora -->
+<a href="#main-content" class="skip-link">Skip to content</a>
 <div class="fixed inset-0 overflow-hidden pointer-events-none" style="z-index:0;">
   <div class="blob blob-a"></div>
   <div class="blob blob-b"></div>
@@ -108,7 +61,7 @@
 </nav>
 
 <!-- PAGE HEADER -->
-<section class="relative max-w-6xl mx-auto px-6 pt-36 pb-14" style="z-index:1;">
+<section id="main-content" class="relative max-w-6xl mx-auto px-6 pt-36 pb-14" style="z-index:1;">
   <div class="reveal">
     <p class="text-xs tracking-widest uppercase text-white/25 mb-4">Legal</p>
     <h1 class="font-display text-4xl md:text-5xl font-normal text-white leading-tight mb-4">Privacy Policy</h1>
@@ -231,6 +184,10 @@
   </div>
 </footer>
 
+<button id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i data-lucide="arrow-up" class="w-4 h-4"></i>
+</button>
+
 <script>
   lucide.createIcons();
 
@@ -238,6 +195,13 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const nav = document.getElementById('site-nav');
+  const btt = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('nav-scrolled', window.scrollY > 40);
+    btt.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
 
   setTimeout(() => lucide.createIcons(), 200);
 </script>
