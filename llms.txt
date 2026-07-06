@@ -1,0 +1,53 @@
+# Zen New Tab
+
+> A minimalist, privacy-first Chrome new tab extension that replaces the default new tab page with a beautiful, clutter-free dashboard. Built by Gean Paulo as a solo project focused on simplicity and focus.
+
+Zen New Tab is available on the Chrome Web Store. It is free to install and requires no account. All data is stored locally in the browser — nothing is collected, tracked, or sold.
+
+## Key Pages
+
+- [Home](https://zen.geanpaulo.com/): Landing page with overview, features, screenshots, FAQ, and install link.
+- [Help & Guide](https://zen.geanpaulo.com/help.html): Complete guide to every feature — search, quick links, widgets, mini apps, games, and productivity tools.
+- [Changelog](https://zen.geanpaulo.com/devinfo.html): Full version history with release notes for every update.
+- [Privacy Policy](https://zen.geanpaulo.com/privacy.html): Full privacy policy explaining what data is and is not collected.
+- [Contact](https://zen.geanpaulo.com/contact.html): Contact form for questions, feedback, and bug reports.
+
+## Features
+
+- Minimalist new tab dashboard with daily background photos (Unsplash / Lorem Picsum)
+- Daily inspirational quotes (cached locally)
+- Live weather with geolocation (Open-Meteo API, no account required)
+- Integrated search bar with real-time suggestions
+- Quick links bar (up to 8 custom sites)
+- Sticky notes (draggable, resizable, color-coded, stored locally)
+- To-do list with persistent storage and drag-to-reorder
+- Pomodoro Timer (25/5/15 min modes, background-accurate)
+- Countdown Timer with alarm and tab title countdown
+- Event Countdown for birthdays, holidays, and deadlines
+- World Clock (up to 8 cities, auto timezone lookup)
+- Calendar widget with month navigation
+- Public Holidays for selectable country
+- Day/Week/Year Progress bars
+- Breathing Exercise (4-4-4-4 box breathing)
+- Focus Sounds (Rain, Wind, Ocean, Fire, White Noise, Brown Noise — fully offline via Web Audio API)
+- Calculator (keyboard-driven)
+- Games: 2048, Memory Match, Snake, Tetris
+- 12/24h clock toggle
+- Custom wallpaper upload (stored locally as base64, never uploaded)
+- Particle effects toggle
+- All widgets are freely draggable and togglable from Settings
+
+## Technical Details
+
+- Platform: Google Chrome extension (Manifest V3)
+- Storage: Browser localStorage only — no server, no database
+- Privacy: No PII collected, no analytics, no ads, no remote code execution
+- APIs used: Open-Meteo (weather + timezone), Nominatim/OpenStreetMap (geocoding), Unsplash/Lorem Picsum (backgrounds), multiple quote APIs (ZenQuotes, TypeFit, Forismatic, etc.)
+- All API calls are read-only, over HTTPS, and return structured JSON only
+
+## Developer
+
+- Name: Gean Paulo
+- Website: https://geanpaulo.com
+- Contact: hello@geanpaulo.com
+- Extension listing: https://chromewebstore.google.com/detail/chhlgdhacpabpphphdhjicnpbpklpdbk
