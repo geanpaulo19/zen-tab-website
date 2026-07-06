@@ -47,6 +47,8 @@
 
     #site-nav { top: 16px; left: 0; right: 0; padding: 0; background: transparent; pointer-events: none; }
     #site-nav .nav-pill { max-width: calc(72rem - 3rem); margin: 0 auto; width: calc(100% - 3rem); background: rgba(14,16,22,0.78); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,255,255,0.10); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,0,0,0.35); pointer-events: auto; }
+    .brand-mark { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; flex: 0 0 24px; overflow: hidden; border-radius: 8px; background: linear-gradient(135deg, rgba(79,142,247,0.22), rgba(94,231,223,0.16)); border: 1px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.82); font-size: 0.68rem; font-weight: 700; line-height: 1; }
+    .brand-mark img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
     .btn-primary { background: linear-gradient(135deg, #4f8ef7 0%, #5ee7df 100%); color: #0a0c10; font-weight: 600; border-radius: 14px; transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s; }
     .btn-primary:hover { opacity: 0.9; transform: translateY(-1px) scale(1.01); box-shadow: 0 8px 30px rgba(79,142,247,0.35); }
@@ -97,7 +99,9 @@
         <img src="icons/128.png" alt="Zen New Tab" class="w-6 h-6 rounded-lg" onerror="this.style.display='none'" />
         <span class="font-semibold text-sm text-white/85">Zen New Tab</span>
       </a>
-      <div></div>
+      <div class="hidden sm:flex items-center gap-5">
+        <a href="help.html" class="text-xs text-white/45 hover:text-white/80 transition-colors">Help</a>
+      </div>
       <a href="https://chromewebstore.google.com/detail/chhlgdhacpabpphphdhjicnpbpklpdbk?utm_source=item-share-cb"
          target="_blank" rel="noopener noreferrer"
          class="btn-primary text-xs py-1.5 px-4 inline-flex items-center gap-1.5 flex-shrink-0">
@@ -124,7 +128,7 @@
 <section class="relative max-w-6xl mx-auto px-6 py-16" style="z-index:1;">
   <div class="flex flex-col">
 
-    <!-- v2.5 -->
+    <!-- v2.5.1 -->
     <div class="reveal flex gap-5">
       <div class="flex flex-col items-center flex-shrink-0 pt-1">
         <div class="version-dot latest"></div>
@@ -132,7 +136,7 @@
       </div>
       <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
         <div class="flex items-center gap-3 mb-5 flex-wrap">
-          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.5</span>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.5.1</span>
           <span class="text-xs text-white/28">July 04, 2026</span>
           <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(94,231,223,0.08);border:1px solid rgba(94,231,223,0.18);color:rgba(94,231,223,0.75);">Latest</span>
         </div>
@@ -379,11 +383,10 @@
 <footer class="relative" style="z-index:1;">
   <div class="max-w-6xl mx-auto px-6">
     <div class="py-10 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-white/22 border-t" style="border-color:rgba(255,255,255,0.055);">
-      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.5 &nbsp;·&nbsp; Built for focus.</span>
+      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.5.1 &nbsp;·&nbsp; Built for focus.</span>
       <div class="flex items-center gap-5">
         <a href="/privacy.html" class="hover:text-white/55 transition-colors">Privacy Policy</a>
         <a href="mailto:hello@geanpaulo.com" class="hover:text-white/55 transition-colors">Contact</a>
-        <a href="/help.html" class="hover:text-white/55 transition-colors">Help</a>
       </div>
     </div>
   </div>
