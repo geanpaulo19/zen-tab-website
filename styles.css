@@ -154,7 +154,7 @@ body::before {
 #mobile-nav {
   position: fixed;
   inset: 0;
-  z-index: 49;
+  z-index: 60;
   pointer-events: none;
 }
 #mobile-nav .mobile-backdrop {
