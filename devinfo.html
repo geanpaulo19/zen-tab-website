@@ -105,7 +105,7 @@
 <section class="relative max-w-6xl mx-auto px-6 py-16" style="z-index:1;">
   <div class="flex flex-col">
 
-    <!-- v2.5.1 -->
+    <!-- v2.5.3 -->
     <div class="reveal flex gap-5">
       <div class="flex flex-col items-center flex-shrink-0 pt-1">
         <div class="version-dot latest"></div>
@@ -113,9 +113,33 @@
       </div>
       <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
         <div class="flex items-center gap-3 mb-5 flex-wrap">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.5.3</span>
+          <span class="text-xs text-white/28">November 03, 2026</span>
+          <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(94,231,223,0.08);border:1px solid rgba(94,231,223,0.18);color:rgba(94,231,223,0.75);">Latest</span>
+        </div>
+        <ul class="cl-list space-y-1.5">
+          <li><strong>Reliability pass</strong> — a full audit of every widget, timer, and network call in the extension.</li>
+          <li><strong>Tetris, Snake, and 2048</strong> no longer capture keystrokes while you're typing in search, the To-do list, or a sticky note — Tetris previously paused the game or dropped a piece when you typed "p" or space anywhere else on the page.</li>
+          <li>Games now ignore keyboard input while the Settings modal is open.</li>
+          <li>Quote, background photo, weather location, and World Clock city lookups now <strong>time out gracefully</strong> instead of hanging when an API is slow or unreachable.</li>
+          <li>Removed the retired <strong>Quotable</strong> quote source (the service shut down), so quote fallbacks no longer spend seconds retrying a dead endpoint.</li>
+          <li>Timer and settings toasts (Pomodoro done, Countdown alarm, "Settings saved") are no longer hidden behind the Settings modal.</li>
+          <li><strong>Breathing Exercise</strong> no longer shows a stale phase label when you stop a session mid-transition.</li>
+          <li>Floating particles now respect your system <strong>Reduce motion</strong> preference.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- v2.5.1 -->
+    <div class="reveal flex gap-5">
+      <div class="flex flex-col items-center flex-shrink-0 pt-1">
+        <div class="version-dot old"></div>
+        <div class="flex-1 w-px mt-2" style="background:linear-gradient(to bottom,rgba(255,255,255,0.07),transparent);min-height:32px;"></div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
+        <div class="flex items-center gap-3 mb-5 flex-wrap">
           <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.5.1</span>
           <span class="text-xs text-white/28">July 04, 2026</span>
-          <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(94,231,223,0.08);border:1px solid rgba(94,231,223,0.18);color:rgba(94,231,223,0.75);">Latest</span>
         </div>
         <ul class="cl-list space-y-1.5">
           <li><strong>Appearance customization</strong> — added curated theme presets, wallpaper overlay strength, glass intensity, clock style, search bar style, quick-link tile style, and text shadow controls.</li>
@@ -360,7 +384,7 @@
 <footer class="relative" style="z-index:1;">
   <div class="max-w-6xl mx-auto px-6">
     <div class="py-10 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-white/22 border-t" style="border-color:rgba(255,255,255,0.055);">
-      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.5.1 &nbsp;·&nbsp; Built for focus.</span>
+      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.5.3 &nbsp;·&nbsp; Built for focus.</span>
       <div class="flex items-center gap-5">
         <a href="/privacy.html" class="hover:text-white/55 transition-colors">Privacy Policy</a>
         <a href="/contact.html" class="hover:text-white/55 transition-colors">Contact</a>
