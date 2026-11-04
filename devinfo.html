@@ -105,7 +105,7 @@
 <section class="relative max-w-6xl mx-auto px-6 py-16" style="z-index:1;">
   <div class="flex flex-col">
 
-    <!-- v2.5.3 -->
+    <!-- v2.6.0 -->
     <div class="reveal flex gap-5">
       <div class="flex flex-col items-center flex-shrink-0 pt-1">
         <div class="version-dot latest"></div>
@@ -113,9 +113,29 @@
       </div>
       <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
         <div class="flex items-center gap-3 mb-5 flex-wrap">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.6.0</span>
+          <span class="text-xs text-white/28">November 04, 2026</span>
+          <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(94,231,223,0.08);border:1px solid rgba(94,231,223,0.18);color:rgba(94,231,223,0.75);">Latest</span>
+        </div>
+        <ul class="cl-list space-y-1.5">
+          <li>Added 💱 <strong>Exchange Rates</strong> — a new mini app showing live currency rates against the US Dollar (EUR, GBP, JPY, PHP, AUD, CAD, SGD, INR) with flag icons, cached for 6 hours. Enable it from Settings → Mini Apps.</li>
+          <li><strong>Weather reliability</strong> — the widget no longer silently disappears when something fails. If location is blocked it shows "Click to enable location"; if the forecast can't load it shows "Weather unavailable".</li>
+          <li>The weather chip is now <strong>click-to-retry</strong> — tap it to refresh or re-trigger the location prompt.</li>
+          <li>Location lookups now use low-accuracy mode, which is faster and more reliable for city-level weather on desktops — a common cause of weather not working, e.g. on Brave.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- v2.5.3 -->
+    <div class="reveal flex gap-5">
+      <div class="flex flex-col items-center flex-shrink-0 pt-1">
+        <div class="version-dot old"></div>
+        <div class="flex-1 w-px mt-2" style="background:linear-gradient(to bottom,rgba(255,255,255,0.07),transparent);min-height:32px;"></div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
+        <div class="flex items-center gap-3 mb-5 flex-wrap">
           <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.5.3</span>
           <span class="text-xs text-white/28">November 03, 2026</span>
-          <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(94,231,223,0.08);border:1px solid rgba(94,231,223,0.18);color:rgba(94,231,223,0.75);">Latest</span>
         </div>
         <ul class="cl-list space-y-1.5">
           <li><strong>Reliability pass</strong> — a full audit of every widget, timer, and network call in the extension.</li>
@@ -384,7 +404,7 @@
 <footer class="relative" style="z-index:1;">
   <div class="max-w-6xl mx-auto px-6">
     <div class="py-10 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-white/22 border-t" style="border-color:rgba(255,255,255,0.055);">
-      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.5.3 &nbsp;·&nbsp; Built for focus.</span>
+      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.6.0 &nbsp;·&nbsp; Built for focus.</span>
       <div class="flex items-center gap-5">
         <a href="/privacy.html" class="hover:text-white/55 transition-colors">Privacy Policy</a>
         <a href="/contact.html" class="hover:text-white/55 transition-colors">Contact</a>
