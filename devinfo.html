@@ -105,7 +105,7 @@
 <section class="relative max-w-6xl mx-auto px-6 py-16" style="z-index:1;">
   <div class="flex flex-col">
 
-    <!-- v2.6.0 -->
+    <!-- v2.7.0 -->
     <div class="reveal flex gap-5">
       <div class="flex flex-col items-center flex-shrink-0 pt-1">
         <div class="version-dot latest"></div>
@@ -113,9 +113,37 @@
       </div>
       <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
         <div class="flex items-center gap-3 mb-5 flex-wrap">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.7.0</span>
+          <span class="text-xs text-white/28">November 05, 2026</span>
+          <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(94,231,223,0.08);border:1px solid rgba(94,231,223,0.18);color:rgba(94,231,223,0.75);">Latest</span>
+        </div>
+        <ul class="cl-list space-y-1.5">
+          <li>Added 🧘 <strong>Zen Mode</strong> — press <code>Z</code> (or use the new card at the top of Settings) to hide every widget and note for a blank, calm page while the clock and search stay. The choice is remembered across tabs and restarts, and running games pause while it's on.</li>
+          <li>Added <strong>Device Sync</strong> — your theme, appearance settings, quick links, to-dos, world clock cities, and events now follow you across devices via Chrome sync. Widget positions, timers, notes, and your wallpaper stay on each device.</li>
+          <li>Settings redesign — Mini Apps are now a categorized list (Timers, Games, Info, Tools), the World Clock and Holidays managers moved next to their toggles, and the scattered Data, Help, Bug Report, Developer, and Version sections merged into one "About &amp; Support" section.</li>
+          <li>🎮 <strong>Tetris and Snake no longer auto-play</strong> when enabled — they wait for your first keypress, and a paused Tetris stays paused until you resume it.</li>
+          <li>Games now render <strong>sharp on retina displays</strong>.</li>
+          <li>🐍 Snake accepts fast consecutive turns (input buffering) instead of dropping them.</li>
+          <li>📆 Event Countdown now lists upcoming events first, then past ones.</li>
+          <li>🖼️ Wallpaper photos from phones now import with the correct orientation.</li>
+          <li>Reduced-motion users: entrance animations and clock digit flips now respect the system setting, alongside the earlier particles change.</li>
+          <li>Keyboard users get visible focus outlines across the whole interface.</li>
+          <li><strong>Reliability hardening</strong> — every saved setting is now quota-safe, so a full storage area can no longer crash a widget mid-use; timer tick writes are throttled; and the core logic is covered by a 66-check automated test suite.</li>
+          <li>Sticky note IDs can no longer collide on rapid adds, and timer displays clamp against system clock changes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- v2.6.0 -->
+    <div class="reveal flex gap-5">
+      <div class="flex flex-col items-center flex-shrink-0 pt-1">
+        <div class="version-dot old"></div>
+        <div class="flex-1 w-px mt-2" style="background:linear-gradient(to bottom,rgba(255,255,255,0.07),transparent);min-height:32px;"></div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
+        <div class="flex items-center gap-3 mb-5 flex-wrap">
           <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.6.0</span>
           <span class="text-xs text-white/28">November 04, 2026</span>
-          <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(94,231,223,0.08);border:1px solid rgba(94,231,223,0.18);color:rgba(94,231,223,0.75);">Latest</span>
         </div>
         <ul class="cl-list space-y-1.5">
           <li>Added 💱 <strong>Exchange Rates</strong> — a new mini app showing live currency rates against the US Dollar (EUR, GBP, JPY, PHP, AUD, CAD, SGD, INR) with flag icons, cached for 6 hours. Enable it from Settings → Mini Apps.</li>
@@ -404,7 +432,7 @@
 <footer class="relative" style="z-index:1;">
   <div class="max-w-6xl mx-auto px-6">
     <div class="py-10 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-white/22 border-t" style="border-color:rgba(255,255,255,0.055);">
-      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.6.0 &nbsp;·&nbsp; Built for focus.</span>
+      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.7.0 &nbsp;·&nbsp; Built for focus.</span>
       <div class="flex items-center gap-5">
         <a href="/privacy.html" class="hover:text-white/55 transition-colors">Privacy Policy</a>
         <a href="/contact.html" class="hover:text-white/55 transition-colors">Contact</a>
