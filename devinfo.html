@@ -105,7 +105,7 @@
 <section class="relative max-w-6xl mx-auto px-6 py-16" style="z-index:1;">
   <div class="flex flex-col">
 
-    <!-- v2.7.0 -->
+    <!-- v2.7.1 -->
     <div class="reveal flex gap-5">
       <div class="flex flex-col items-center flex-shrink-0 pt-1">
         <div class="version-dot latest"></div>
@@ -113,9 +113,27 @@
       </div>
       <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
         <div class="flex items-center gap-3 mb-5 flex-wrap">
-          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.7.0</span>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.7.1</span>
           <span class="text-xs text-white/28">November 05, 2026</span>
           <span class="text-xs px-2 py-0.5 rounded-full" style="background:rgba(94,231,223,0.08);border:1px solid rgba(94,231,223,0.18);color:rgba(94,231,223,0.75);">Latest</span>
+        </div>
+        <ul class="cl-list space-y-1.5">
+          <li><strong>Fixed a sync notification bug</strong> — the "Settings synced from your other device" message could appear after every settings change, even when nothing came from another device. It now appears only when settings genuinely arrive from one of your other devices.</li>
+          <li>Hardened the sync pipeline against self-echo, so cross-device sync stays accurate and quiet in the background.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- v2.7.0 -->
+    <div class="reveal flex gap-5">
+      <div class="flex flex-col items-center flex-shrink-0 pt-1">
+        <div class="version-dot old"></div>
+        <div class="flex-1 w-px mt-2" style="background:linear-gradient(to bottom,rgba(255,255,255,0.07),transparent);min-height:32px;"></div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 mb-5 flex-1">
+        <div class="flex items-center gap-3 mb-5 flex-wrap">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full" style="background:linear-gradient(135deg,rgba(79,142,247,0.18),rgba(94,231,223,0.09));border:1px solid rgba(79,142,247,0.28);color:#7eb8ff;">v2.7.0</span>
+          <span class="text-xs text-white/28">November 05, 2026</span>
         </div>
         <ul class="cl-list space-y-1.5">
           <li>Added 🧘 <strong>Zen Mode</strong> — press <code>Z</code> (or use the new card at the top of Settings) to hide every widget and note for a blank, calm page while the clock and search stay. The choice is remembered across tabs and restarts, and running games pause while it's on.</li>
@@ -432,7 +450,7 @@
 <footer class="relative" style="z-index:1;">
   <div class="max-w-6xl mx-auto px-6">
     <div class="py-10 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs text-white/22 border-t" style="border-color:rgba(255,255,255,0.055);">
-      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.7.0 &nbsp;·&nbsp; Built for focus.</span>
+      <span>© 2026 Zen New Tab &nbsp;·&nbsp; v2.7.1 &nbsp;·&nbsp; Built for focus.</span>
       <div class="flex items-center gap-5">
         <a href="/privacy.html" class="hover:text-white/55 transition-colors">Privacy Policy</a>
         <a href="/contact.html" class="hover:text-white/55 transition-colors">Contact</a>
